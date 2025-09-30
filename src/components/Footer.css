@@ -1,0 +1,325 @@
+.footer {
+  background: #2563eb;
+  color: white;
+}
+
+.footer-main {
+  padding: 60px 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+/* Left Side - Government Logos */
+.footer-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.government-logos {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.logo-item {
+  display: flex;
+  align-items: center;
+}
+
+.make-in-india-logo,
+.dpiit-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 15px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.lion-icon {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+}
+
+.lion-icon:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #8B4513;
+  border-radius: 50%;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+
+.ashoka-chakra {
+  width: 30px;
+  height: 30px;
+  background: white;
+  border-radius: 50%;
+  position: relative;
+}
+
+.ashoka-chakra:before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 20px;
+  background: #FFD700;
+  border-radius: 50%;
+}
+
+.logo-text {
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+}
+
+/* Center - Brand and Delivery */
+.footer-center {
+  text-align: center;
+}
+
+.brand-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.brand-name {
+  font-size: 3rem;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.delivery-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.delivery-label {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.delivery-location {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Right Side - Social Media */
+.footer-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.social-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+
+.follow-text {
+  font-size: 16px;
+  margin: 0;
+  opacity: 0.9;
+}
+
+.social-icons {
+  display: flex;
+  gap: 15px;
+}
+
+.social-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.social-icon:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Bottom Footer with Cows */
+.footer-bottom {
+  background: white;
+  padding: 30px 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copyright {
+  color: #374151;
+}
+
+.copyright p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.cow-silhouettes {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.cow {
+  width: 40px;
+  height: 30px;
+  position: relative;
+}
+
+.cow-1 {
+  background: #8B4513;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.cow-2 {
+  background: #2F2F2F;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.cow-3 {
+  background: #2F2F2F;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  width: 30px;
+  height: 25px;
+}
+
+.cow:before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+.cow:after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: inherit;
+  border-radius: 50%;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    text-align: center;
+  }
+  
+  .footer-left,
+  .footer-right {
+    justify-content: center;
+  }
+  
+  .brand-name {
+    font-size: 2.5rem;
+  }
+  
+  .government-logos {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .social-icons {
+    justify-content: center;
+  }
+  
+  .footer-bottom-content {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .cow-silhouettes {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-main {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+  
+  .brand-name {
+    font-size: 2rem;
+  }
+  
+  .delivery-location {
+    font-size: 20px;
+  }
+  
+  .social-icon {
+    width: 35px;
+    height: 35px;
+  }
+  
+  .social-icons {
+    gap: 10px;
+  }
+  
+  .cow {
+    width: 35px;
+    height: 25px;
+  }
+  
+  .cow-3 {
+    width: 25px;
+    height: 20px;
+  }
+}

@@ -1,0 +1,255 @@
+/* A — Utilities / variables */
+:root {
+  --anim-primary-duration: 0.65s;
+  --anim-primary-ease: cubic-bezier(.22,.9,.28,1); /* easeOut-ish */
+  --anim-micro-duration: 0.18s;
+  --stagger-step: 0.08s;
+}
+
+/* reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .anim, .stagger > *, .hero-word, .hero-tagline, .product-card, .testimonial-card { 
+    transition: none !important; 
+    animation: none !important; 
+    transform: none !important; 
+    opacity: 1 !important; 
+  }
+}
+
+/* B — Fade + Slide In (text or image) */
+.anim-fade-slide {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--anim-primary-duration) var(--anim-primary-ease),
+              transform var(--anim-primary-duration) var(--anim-primary-ease);
+}
+
+.anim-fade-slide.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.anim-fade-slide-left {
+  opacity: 0;
+  transform: translateX(-14px);
+  transition: opacity var(--anim-primary-duration) var(--anim-primary-ease),
+              transform var(--anim-primary-duration) var(--anim-primary-ease);
+}
+
+.anim-fade-slide-left.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.anim-fade-slide-right {
+  opacity: 0;
+  transform: translateX(14px);
+  transition: opacity var(--anim-primary-duration) var(--anim-primary-ease),
+              transform var(--anim-primary-duration) var(--anim-primary-ease);
+}
+
+.anim-fade-slide-right.in-view {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* C — Staggered reveal (list items, cards) */
+.stagger > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--anim-primary-duration) var(--anim-primary-ease),
+              transform var(--anim-primary-duration) var(--anim-primary-ease);
+}
+
+.stagger > *.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* D — Hero Image Zoom (slow scale) */
+.hero-img {
+  transform: scale(1.06);
+  transition: transform 9s linear;
+  will-change: transform;
+}
+
+.hero-img.paused { 
+  transition-duration: 0s; 
+}
+
+.hero-img.zoom-in {
+  transform: scale(1);
+}
+
+/* E — Parallax (scroll) */
+[data-parallax] {
+  will-change: transform;
+}
+
+/* F — Microinteraction (button hover) */
+.btn {
+  transition: transform 160ms var(--anim-primary-ease), 
+              box-shadow 160ms var(--anim-primary-ease);
+  transform-origin: center;
+}
+
+.btn:hover, .btn:focus {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.btn:active { 
+  transform: translateY(-1px) scale(0.995); 
+  transition-duration: 90ms; 
+}
+
+/* G — Typing (masked reveal) */
+.typing {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid rgba(0,0,0,0.75);
+  animation: typing 2.0s steps(30,end) forwards, blink 0.8s step-end infinite;
+  width: 0;
+}
+
+@keyframes typing { 
+  from { width: 0 } 
+  to { width: 100% } 
+}
+
+@keyframes blink { 
+  50% { border-color: transparent } 
+  100% { border-color: rgba(0,0,0,0.75) } 
+}
+
+/* H — Underline draw animation */
+.link-underline {
+  position: relative;
+  color: inherit;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0; 
+  bottom: -4px; 
+  height: 2px;
+  background: currentColor;
+  width: 0;
+  transition: width 260ms var(--anim-primary-ease);
+}
+
+.link-underline:hover::after,
+.link-underline.in-view::after { 
+  width: 100%; 
+}
+
+/* I — Modal open (scale + fade backdrop) */
+.modal-backdrop { 
+  opacity: 0; 
+  transition: opacity 240ms var(--anim-primary-ease); 
+}
+
+.modal-backdrop.in-view { 
+  opacity: 0.6; 
+}
+
+.modal-panel {
+  transform: translateY(8px) scale(.98);
+  opacity: 0;
+  transition: transform 320ms var(--anim-primary-ease), 
+              opacity 320ms var(--anim-primary-ease);
+}
+
+.modal-panel.in-view { 
+  transform: translateY(0) scale(1); 
+  opacity: 1; 
+}
+
+/* J — Image hover with subtle rotate & scale */
+.img-card { 
+  transition: transform 420ms var(--anim-primary-ease), 
+              box-shadow 420ms var(--anim-primary-ease); 
+  transform-origin: center; 
+}
+
+.img-card:hover { 
+  transform: scale(1.04) rotate(-0.6deg); 
+  box-shadow: 0 20px 40px rgba(0,0,0,0.12); 
+}
+
+/* Legacy compatibility */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity var(--anim-primary-duration) var(--anim-primary-ease),
+              transform var(--anim-primary-duration) var(--anim-primary-ease);
+}
+
+.animate-on-scroll.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-word {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease-out;
+}
+
+.hero-word.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-tagline {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out;
+}
+
+.hero-tagline.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.product-card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.95);
+  transition: all 0.6s ease-out;
+}
+
+.product-card.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.testimonial-card {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.6s ease-out;
+}
+
+.testimonial-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover-lift {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.btn-hover {
+  transition: all 0.3s ease;
+}
+
+.btn-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}

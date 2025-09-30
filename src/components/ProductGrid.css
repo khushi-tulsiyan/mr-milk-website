@@ -1,0 +1,279 @@
+.product-grid-section {
+  padding: 60px 0;
+  background: #f8f9fa;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.product-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.product-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.product-image-container {
+  height: 200px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: #f8f9fa;
+}
+
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  width: auto;
+  height: auto;
+}
+
+.ghee-bg {
+  background: linear-gradient(135deg, #FFE4B5 0%, #FFD700 100%);
+}
+
+.dairy-bg {
+  background: linear-gradient(135deg, #E6FFE6 0%, #90EE90 100%);
+}
+
+.product-image {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ghee Jar Styles */
+.product-jar-large {
+  width: 80px;
+  height: 100px;
+  background: linear-gradient(to bottom, #FFD700 0%, #FFA500 100%);
+  border: 3px solid #FF8C00;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.ghee-content {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  background: linear-gradient(to bottom, #FFD700 0%, #FFA500 100%);
+  border-radius: 4px;
+}
+
+.ghee-overflow {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 20px;
+  background: #FFD700;
+  border-radius: 50% 50% 0 0;
+  opacity: 0.9;
+}
+
+.cow-icon-small {
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+.cow-icon-small:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+/* Chaach Bottle Styles */
+.chaach-bottle {
+  width: 60px;
+  height: 80px;
+  background: white;
+  border: 2px solid #32CD32;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bottle-cap {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 10px;
+  background: #32CD32;
+  border-radius: 4px;
+}
+
+.liquid-splash {
+  position: absolute;
+  top: -10px;
+  right: -5px;
+  width: 15px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.8;
+}
+
+.animal-icon {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20px;
+  height: 15px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+.animal-icon:before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 8px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+/* Dahi Tub Styles */
+.dahi-tub {
+  width: 70px;
+  height: 50px;
+  background: white;
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dahi-content {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  background: #FFF8DC;
+  border-radius: 10px;
+}
+
+.cow-pattern {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 15px;
+  height: 10px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+.cow-pattern:before {
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 6px;
+  height: 6px;
+  background: #8B4513;
+  border-radius: 50%;
+}
+
+.buy-now-btn {
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.product-name {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  line-height: 1.3;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-row {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  .product-image-container {
+    height: 150px;
+  }
+  
+  .product-jar-large {
+    width: 60px;
+    height: 80px;
+  }
+  
+  .chaach-bottle {
+    width: 50px;
+    height: 70px;
+  }
+  
+  .dahi-tub {
+    width: 60px;
+    height: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-row {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+  
+  .product-grid-section {
+    padding: 40px 0;
+  }
+  
+  .container {
+    padding: 0 15px;
+  }
+}

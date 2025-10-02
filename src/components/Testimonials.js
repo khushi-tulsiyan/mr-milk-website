@@ -5,7 +5,7 @@ import { useScrollAnimation, useStaggeredAnimation } from '../hooks/useScrollAni
 
 const Testimonials = () => {
   const [sectionRef, isSectionVisible] = useScrollAnimation();
-  const [setTestimonialsVisible, visibleTestimonials] = useStaggeredAnimation(3, 0.4);
+  const [setTestimonialsVisible, visibleTestimonials] = useStaggeredAnimation(6, 0.4);
 
   React.useEffect(() => {
     if (isSectionVisible) {
@@ -16,21 +16,39 @@ const Testimonials = () => {
   const testimonials = [
     {
       id: 1,
-      name: "Rakhi Sharma",
+      name: "Bandana Sinha Thakur",
       rating: 5,
-      text: "I am highly satisfied with M.R Milk products. It comes with excellent packaging with commendable hygiene. Would definitely recommend it."
+      text: "I love how fresh M.R. Milk tastes! It honestly reminds me of the milk we used to get back home from the dairy. The packaging is neat, no spills, and always feels hygienic. I feel happy giving it to my kids every morning."
     },
     {
       id: 2,
-      name: "Paritosh",
-      rating: 4,
-      text: "I am highly satisfied with M.R Milk products. It comes with excellent packaging with commendable hygiene. Would definitely recommend it. Just a bit overpriced."
+      name: "Ravinder Kumar",
+      rating: 5,
+      text: "I've been using M.R. Milk for quite some time now, and it has never let me down. Freshness, quality, hygiene - everything is top-notch. I've even recommended it to my relatives, and they all feel the same way."
     },
     {
       id: 3,
+      name: "Renu",
+      rating: 5,
+      text: "M.R. Milk is always fresh and clean. I don't have to worry about quality at all, which makes life easier. The packaging is also very convenient. It's become a daily part of my kitchen."
+    },
+    {
+      id: 4,
+      name: "Rakhi Sharma",
+      rating: 5,
+      text: "I can really taste the difference with M.R. Milk. It's rich, fresh, and I know it's safe for my family. The packaging is also hygienic and easy to handle. I feel good knowing I'm giving the best to my loved ones."
+    },
+    {
+      id: 5,
+      name: "Paritosh",
+      rating: 5,
+      text: "The milk is fresh, the taste is perfect, and the packaging is spot on. Honestly, I don't even think about switching brands anymore. M.R. Milk has earned my trust."
+    },
+    {
+      id: 6,
       name: "Hitesh Mathur",
       rating: 5,
-      text: "I am highly satisfied with M.R Milk products. It comes with excellent packaging with commendable hygiene. Would definitely recommend it."
+      text: "M.R. Milk has become a part of my family's routine. The milk is always fresh, and you can tell it's handled with care. I don't have to worry about hygiene or quality, and that's a big relief in today's times."
     }
   ];
 

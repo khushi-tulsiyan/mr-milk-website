@@ -6,7 +6,6 @@ import ProductGrid from './ProductGrid';
 
 const HeroSection = () => {
   const [frameRef, isVisible] = useScrollAnimation();
-  const [whyRef, isWhyVisible] = useScrollAnimation();
   const [visibleWords, setVisibleWords] = useState([]);
   const [showTagline, setShowTagline] = useState(false);
 
@@ -31,10 +30,10 @@ const HeroSection = () => {
 
   return (
     <section className="hero-section">
-      {/* SVG base frame (first frame) */}
+      {/* Base frame (first frame) */}
       <div className={`hero-svg-frame anim ${isVisible ? 'in-view' : ''}`} ref={frameRef}>
         <img
-          src="/images/mr/hero-reference.svg"
+          src="/images/mr/Variant6.png"
           alt="Hero Frame"
           className="hero-base-svg"
         />
@@ -55,64 +54,20 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Why Choose Us image (animated) over the SVG */}
-      <div className={`why-overlay anim ${isWhyVisible ? 'in-view' : ''}`} ref={whyRef}>
-        <img
-          src="/images/mr/Property 1=Variant3.png"
-          alt="Why Choose Us"
-          className="why-overlay-image"
-        />
-      </div>
 
-      {/* Product Cards after Why Choose Us */}
-      <div className="hero-products-section">
-        <div className="hero-product-cards">
-          {/* RAW A2 COW MILK */}
-          <div className="hero-product-card">
-            <div className="product-visual">
-              <img 
-                src="/images/mr/raw a2 cow milk without bg.png" 
-                alt="RAW A2 COW MILK"
-                className="product-bottle-image"
-              />
-            </div>
-            <button className="hero-buy-btn">BUY NOW</button>
-            <div className="hero-product-name">RAW A2 COW MILK</div>
-            <div className="hero-product-desc">A2 milk from Sahiwal cows, easy to digest and naturally pure</div>
-            <div className="hero-contact">Call +91 72309 20774</div>
-          </div>
-
-          {/* RAW BUFFALO MILK */}
-          <div className="hero-product-card">
-            <div className="product-visual">
-              <img 
-                src="/images/mr/BUFFALOA MILK.png" 
-                alt="RAW BUFFALO MILK"
-                className="product-bottle-image"
-              />
-            </div>
-            <button className="hero-buy-btn">BUY NOW</button>
-            <div className="hero-product-name">RAW BUFFALO MILK</div>
-            <div className="hero-product-desc">Creamy buffalo milk, rich and wholesome for a healthy diet</div>
-            <div className="hero-contact">Call +91 72309 20774</div>
-          </div>
-
-          {/* RAW COW MILK */}
-          <div className="hero-product-card">
-            <div className="product-visual">
-              <img 
-                src="/images/mr/raw buffalo milk.png" 
-                alt="RAW COW MILK"
-                className="product-bottle-image"
-              />
-            </div>
-            <button className="hero-buy-btn">BUY NOW</button>
-            <div className="hero-product-name">RAW COW MILK</div>
-            <div className="hero-product-desc">Pure cow's milk, fresh from the farm to your home</div>
-            <div className="hero-contact">Call +91 72309 20774</div>
-          </div>
+      {/* Why Choose Us section after hero */}
+      <div className="why-choose-us-section">
+        <div className="why-choose-us-container">
+          <img
+            src="/images/mr/Property 1=Variant3.png"
+            alt="Why Choose Us"
+            className="why-choose-us-image"
+          />
         </div>
       </div>
+
+      {/* ProductGrid component after Why Choose Us animation */}
+      <ProductGrid />
     </section>
   );
 };

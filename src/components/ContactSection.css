@@ -1,0 +1,43 @@
+.contact-section {
+  position: relative;
+  padding: 0;
+  background: white;
+  overflow: hidden;
+}
+
+.contact-container {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.contact-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 0;
+  }
+  
+  .contact-container {
+    padding: 0;
+  }
+  
+  .contact-image {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-image {
+    width: 100%;
+    height: auto;
+  }
+}

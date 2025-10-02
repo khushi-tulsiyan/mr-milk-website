@@ -1,0 +1,142 @@
+.about-us-section {
+  position: relative;
+  padding: 0;
+  background: white;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.about-us-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+.about-us-image {
+  width: 100%;
+  height: 100vh;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.about-us-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  border-radius: 16px;
+  opacity: 0;
+  transform: scale(0.95);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  padding-left: 40px;
+}
+
+.about-us-overlay.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.about-us-content {
+  text-align: left;
+  color: black;
+  padding: 40px 40px 40px 0;
+  max-width: 800px;
+  background: transparent;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.about-us-title {
+  font-size: clamp(36px, 6vw, 56px);
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: #2563eb;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.2s;
+}
+
+.about-us-overlay.visible .about-us-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-us-text {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 0.4s;
+}
+
+.about-us-overlay.visible .about-us-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.about-us-text p {
+  font-size: clamp(16px, 2.5vw, 20px);
+  font-weight: bold;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  color: #333333;
+  text-align: left;
+  width: 100%;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.about-us-text p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-us-section {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .about-us-container {
+    height: 100vh;
+    padding: 0;
+  }
+  
+  .about-us-image {
+    height: 100vh;
+  }
+  
+  .about-us-content {
+    padding: 20px;
+  }
+  
+  .about-us-title {
+    font-size: clamp(28px, 8vw, 40px);
+    margin-bottom: 20px;
+  }
+  
+  .about-us-text p {
+    font-size: clamp(14px, 4vw, 18px);
+    margin-bottom: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .about-us-content {
+    padding: 16px;
+  }
+  
+  .about-us-title {
+    margin-bottom: 16px;
+  }
+  
+  .about-us-text p {
+    margin-bottom: 14px;
+  }
+}

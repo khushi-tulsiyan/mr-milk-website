@@ -10,21 +10,29 @@ const HeroSection = () => {
   const [showTagline, setShowTagline] = useState(false);
 
   useEffect(() => {
-    setVisibleWords([0]);
-    const timer1 = setTimeout(() => {
+    const baseDelay = 1000; // 1s delay
+
+    const t0 = setTimeout(() => {
+      setVisibleWords([0]);
+    }, baseDelay);
+
+    const t1 = setTimeout(() => {
       setVisibleWords(prev => [...prev, 1]);
-    }, 500);
-    const timer2 = setTimeout(() => {
+    }, baseDelay + 500);
+
+    const t2 = setTimeout(() => {
       setVisibleWords(prev => [...prev, 2]);
-    }, 1000);
-    const timer3 = setTimeout(() => {
+    }, baseDelay + 1000);
+
+    const t3 = setTimeout(() => {
       setShowTagline(true);
-    }, 3500);
+    }, baseDelay + 3500);
 
     return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-      clearTimeout(timer3);
+      clearTimeout(t0);
+      clearTimeout(t1);
+      clearTimeout(t2);
+      clearTimeout(t3);
     };
   }, []);
 

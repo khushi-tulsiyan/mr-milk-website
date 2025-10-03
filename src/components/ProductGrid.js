@@ -92,7 +92,7 @@ const ProductGrid = () => {
           {dairyProducts.map((product, index) => (
             <div 
               key={product.id} 
-              className={`product-card dairy-card img-card ${visibleDairyItems.includes(index) ? 'visible' : ''}`}
+              className={`product-card dairy-card img-card ${visibleDairyItems.includes(index) ? 'visible' : ''} ${product.name === 'PANEER' ? 'center-paneer' : ''}`}
             >
               <div className="product-image-container">
                 <img 

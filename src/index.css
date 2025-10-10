@@ -6,6 +6,41 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* Mobile-specific optimizations */
+@media (max-width: 768px) {
+  body {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  /* Prevent horizontal scroll */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+  
+  /* Improve text rendering on mobile */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+}
+
+@media (max-width: 360px) {
+  body {
+    font-size: 12px;
+    line-height: 1.3;
+  }
 }
 
 code {

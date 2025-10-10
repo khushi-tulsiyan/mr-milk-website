@@ -37,10 +37,60 @@ body {
   transform: translateY(-2px);
 }
 
+/* Global Mobile Optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Touch-friendly button sizes */
+.btn {
+  min-height: 44px;
+  min-width: 44px;
+  touch-action: manipulation;
+}
+
 /* Responsive design */
 @media (max-width: 768px) {
   .btn {
-    padding: 10px 20px;
+    padding: 12px 20px;
     font-size: 14px;
+    min-height: 48px;
+  }
+  
+  /* Improve touch targets */
+  .btn, button, a {
+    min-height: 44px;
+    min-width: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .btn {
+    padding: 10px 16px;
+    font-size: 13px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 360px) {
+  .btn {
+    padding: 8px 14px;
+    font-size: 12px;
+    min-height: 40px;
   }
 }

@@ -16,6 +16,82 @@
   }
 }
 
+/* Mobile-specific animation optimizations */
+@media (max-width: 768px) {
+  /* Reduce animation complexity on mobile for better performance */
+  .hero-img {
+    transform: scale(1.02);
+    transition: transform 6s linear;
+  }
+  
+  .hero-img.zoom-in {
+    transform: scale(1);
+  }
+  
+  /* Simplify floating animations on mobile */
+  .hero-image.product-1.in-view,
+  .hero-image.product-2.in-view,
+  .hero-image.product-4.in-view,
+  .hero-image.product-5.in-view,
+  .hero-image.product-6.in-view {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  /* Reduce stagger delays on mobile */
+  .stagger > * {
+    transition-delay: 0.1s;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Further reduce animations on small mobile devices */
+  .hero-img {
+    transform: scale(1.01);
+    transition: transform 4s linear;
+  }
+  
+  .hero-image.product-1.in-view,
+  .hero-image.product-2.in-view,
+  .hero-image.product-4.in-view,
+  .hero-image.product-5.in-view,
+  .hero-image.product-6.in-view {
+    animation: float 5s ease-in-out infinite;
+  }
+  
+  /* Disable some animations on very small screens for performance */
+  .img-card:hover {
+    transform: scale(1.02) rotate(-0.3deg);
+  }
+  
+  .btn:hover, .btn:focus {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
+
+@media (max-width: 360px) {
+  /* Minimal animations on very small screens */
+  .hero-img {
+    transform: scale(1);
+    transition: none;
+  }
+  
+  .hero-image.product-1.in-view,
+  .hero-image.product-2.in-view,
+  .hero-image.product-4.in-view,
+  .hero-image.product-5.in-view,
+  .hero-image.product-6.in-view {
+    animation: none;
+  }
+  
+  .img-card:hover {
+    transform: scale(1.01);
+  }
+  
+  .btn:hover, .btn:focus {
+    transform: translateY(-1px);
+  }
+}
+
 /* B — Fade + Slide In (text or image) */
 .anim-fade-slide {
   opacity: 0;

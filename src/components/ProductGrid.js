@@ -90,9 +90,9 @@ const ProductGrid = () => {
         {/* Dairy Products Row */}
         <div className="product-row dairy-row stagger">
           {dairyProducts.map((product, index) => (
-            <div 
-              key={product.id} 
-              className={`product-card dairy-card img-card ${visibleDairyItems.includes(index) ? 'visible' : ''} ${product.name === 'PANEER' ? 'center-paneer' : ''}`}
+            <div
+              key={product.id}
+              className={`product-card dairy-card img-card ${visibleDairyItems.includes(index) ? 'visible' : ''}`}
             >
               <div className="product-image-container">
                 <img 

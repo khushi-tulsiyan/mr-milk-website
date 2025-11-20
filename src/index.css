@@ -1,49 +1,91 @@
+
+/* ==========================================================
+   Global Reset & Base Setup (patched)
+   ========================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root {
+  --text: #333333;
+  --bg: #ffffff;
+  --brand: #1e3a8a;
+  --primary: #2563eb;
+  --section-pad: clamp(2rem, 5vw, 4rem);
+  --container-pad: clamp(1rem, 3vw, 2rem);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  font-size: 16px;
+}
+
 body {
   margin: 0;
-  background-color: white;
+  color: var(--text);
+  background: var(--bg);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overflow-x: hidden;
 }
 
-/* Mobile-specific optimizations */
+/* Images & media: prevent inline gaps and overflow */
+img, svg, video, canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Anchor defaults */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* A sensible container to avoid edge-to-edge text and layout jumps */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--container-pad);
+}
+
+/* Headings scale with clamp for better mobile fit */
+h1 { font-size: clamp(1.875rem, 3.5vw, 3rem); line-height: 1.15; }
+h2 { font-size: clamp(1.5rem, 2.8vw, 2.25rem); line-height: 1.2; }
+h3 { font-size: clamp(1.25rem, 2.2vw, 1.5rem); }
+
+/* Reduce default section margin-collapsing surprises */
+section {
+  padding-block: var(--section-pad);
+}
+
+/* Improve 100vh behavior on mobile toolbars */
+@supports (height: 100dvh) {
+  .min-screen {
+    min-height: 100dvh;
+  }
+}
+
+/* Responsive base text */
+@media (max-width: 1024px) {
+  html { font-size: 15px; }
+}
+
 @media (max-width: 768px) {
-  body {
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  /* Prevent horizontal scroll */
-  html, body {
-    overflow-x: hidden;
-    width: 100%;
-  }
-  
-  /* Improve text rendering on mobile */
-  * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+  html { font-size: 14px; }
 }
 
 @media (max-width: 480px) {
-  body {
-    font-size: 13px;
-    line-height: 1.4;
-  }
+  html { font-size: 13px; }
 }
 
 @media (max-width: 360px) {
-  body {
-    font-size: 12px;
-    line-height: 1.3;
-  }
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  html { font-size: 12px; }
 }

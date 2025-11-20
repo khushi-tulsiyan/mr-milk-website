@@ -3,6 +3,8 @@
   isolation: isolate;
   min-height: clamp(480px, 60vw, 820px);
   overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 5px;
 }
 
 /* Background layers */
@@ -153,7 +155,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding-top: clamp(8px, 2vw, 16px);
+  padding-top: 0;
   padding-left: 0;
   padding-right: 0;
   pointer-events: none; /* overlay should not block interactions */
@@ -537,7 +539,7 @@
 .why-choose-us-section {
   position: relative;
   background: white;
-  padding: 28px 0;
+  padding: 8px 0;
   z-index: 5;
   display: flex;
   justify-content: center;
@@ -682,9 +684,9 @@
 
 @media (max-width: 768px) {
   .why-choose-us-section {
-    padding: 60px 0;
+    padding: 0;
   }
-  
+
   .why-choose-us-container {
     padding: 0 16px;
   }

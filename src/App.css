@@ -1,96 +1,157 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
 
-body {
-  font-family: 'Arial', sans-serif;
-  line-height: 1.6;
-  color: #333;
-}
-
+/* ==========================================================
+   App Container (patched)
+   ========================================================== */
 .App {
   min-height: 100vh;
-  background-color: white;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
 }
 
-/* Global button styles */
+/* ==========================================================
+   Buttons
+   ========================================================== */
 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   padding: 12px 24px;
   border: none;
   border-radius: 8px;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-}
-
-.btn-primary {
-  background: #2563eb;
-  color: white;
-}
-
-.btn-primary:hover {
-  background: #1d4ed8;
-  transform: translateY(-2px);
-}
-
-/* Global Mobile Optimizations */
-* {
-  -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
-  -ms-text-size-adjust: 100%;
-}
-
-body {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
-
-/* Touch-friendly button sizes */
-.btn {
   min-height: 44px;
   min-width: 44px;
   touch-action: manipulation;
+  text-align: center;
+  line-height: 1;
 }
 
-/* Responsive design */
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn-primary { background: #2563eb; color: #fff; }
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+/* ==========================================================
+   Hero Section (patched to remove negative margins)
+   ========================================================== */
+.hero-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* Use a wrapper to control aspect and overlap without negative margins */
+.hero-media {
+  position: relative;
+  width: 100%;
+  /* Keeps consistent height across devices but remains responsive */
+  aspect-ratio: 1440 / 650;
+}
+
+.hero-media img.hero-base-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Stack content above artwork cleanly */
+.hero-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================
+   Why Choose Us
+   ========================================================== */
+.why-choose-us-section {
+  padding-block: clamp(1.25rem, 4vw, 2rem);
+}
+
+.why-choose-us-section h2 {
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 700;
+  margin-bottom: 24px;
+  text-align: center;
+  color: #1e3a8a;
+}
+
+/* ==========================================================
+   Our Products (remove negative margins/gap hacks)
+   ========================================================== */
+.product-grid-section {
+  position: relative;
+  background-color: #fff;
+  padding-top: clamp(0.5rem, 2vw, 1.25rem);
+}
+
+.product-grid-section h2 {
+  font-size: clamp(1.4rem, 2.8vw, 2rem);
+  font-weight: 700;
+  margin-top: 24px;
+  text-align: center;
+  color: #1e3a8a;
+}
+
+/* Optional grid helper if used */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(0.75rem, 2vw, 1.25rem);
+}
+
+.product-card {
+  grid-column: span 3;
+}
+
+@media (max-width: 1024px) {
+  .product-card { grid-column: span 4; }
+}
+
 @media (max-width: 768px) {
   .btn {
-    padding: 12px 20px;
+    padding: 10px 20px;
     font-size: 14px;
-    min-height: 48px;
-  }
-  
-  /* Improve touch targets */
-  .btn, button, a {
     min-height: 44px;
-    min-width: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
   }
+
+  .hero-media { aspect-ratio: 4 / 3; }
+
+  .why-choose-us-section { padding-block: 24px; }
+  .product-grid-section { padding-top: 16px; }
+
+  .why-choose-us-section h2,
+  .product-grid-section h2 {
+    font-size: clamp(1.2rem, 3.4vw, 1.6rem);
+  }
+
+  .product-card { grid-column: span 6; }
 }
 
 @media (max-width: 480px) {
   .btn {
-    padding: 10px 16px;
+    padding: 8px 16px;
     font-size: 13px;
-    min-height: 44px;
+    min-height: 40px;
   }
+
+  .why-choose-us-section { padding-block: 20px; }
+  .product-grid-section { padding-top: 12px; }
+
+  .product-card { grid-column: span 12; }
 }
 
 @media (max-width: 360px) {
   .btn {
-    padding: 8px 14px;
+    padding: 6px 14px;
     font-size: 12px;
-    min-height: 40px;
   }
 }

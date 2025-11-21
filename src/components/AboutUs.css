@@ -1,81 +1,47 @@
 .about-us-section {
   position: relative;
-  padding: 0;
-  background: white;
+  background: no-repeat center center;
+  background-size: cover;
   overflow: hidden;
-  height: 100vh;
 }
 
 .about-us-container {
   position: relative;
   width: 100%;
-  height: 100vh;
   margin: 0;
-  padding: 0;
-}
-
-.about-us-image {
-  width: 100%;
-  height: 100vh;
-  object-fit: cover;
-  border-radius: 16px;
-}
-
-.about-us-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: transparent;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   border-radius: 16px;
-  opacity: 0;
-  transform: scale(0.95);
-  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  padding-left: 40px;
+  padding: 20px;
 }
 
-.about-us-overlay.visible {
-  opacity: 1;
-  transform: scale(1);
-}
+
+
+
 
 .about-us-content {
   text-align: left;
   color: black;
-  padding: 40px 40px 40px 0;
+  padding: 20px;
   max-width: 800px;
   background: transparent;
-  margin-left: 0;
-  padding-left: 0;
+  opacity: 1;
+  transform: scale(1);
 }
 
 .about-us-title {
   font-size: clamp(36px, 6vw, 56px);
   font-weight: 700;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 0;
   color: #2563eb;
   text-align: center;
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.2s;
-}
-
-.about-us-overlay.visible .about-us-title {
   opacity: 1;
   transform: translateY(0);
 }
 
 .about-us-text {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease 0.4s;
-}
-
-.about-us-overlay.visible .about-us-text {
   opacity: 1;
   transform: translateY(0);
 }
@@ -88,8 +54,6 @@
   color: #333333;
   text-align: left;
   width: 100%;
-  padding-left: 0;
-  margin-left: 0;
 }
 
 .about-us-text p:last-child {
@@ -99,40 +63,27 @@
 /* Responsive Design */
 @media (max-width: 768px) {
   .about-us-section {
+    background-size: contain;
     height: auto;
-    min-height: 100vh;
-    padding: 0;
+    min-height: 400px;
   }
-  
+
   .about-us-container {
-    height: auto;
-    min-height: 100vh;
-    padding: 0;
-    position: relative;
+    padding: 16px;
   }
-  
-  .about-us-image {
-    height: 100vh;
-    object-fit: cover;
-    object-position: center;
-  }
-  
-  .about-us-overlay {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  
+
   .about-us-content {
-    padding: 20px 0;
+    padding: 16px;
     max-width: 100%;
   }
-  
+
   .about-us-title {
     font-size: clamp(24px, 6vw, 36px);
-    margin-bottom: 16px;
+    margin-bottom: 12px;
+    margin-top: 0;
     text-align: center;
   }
-  
+
   .about-us-text p {
     font-size: clamp(13px, 3.5vw, 16px);
     margin-bottom: 14px;
@@ -143,31 +94,25 @@
 
 @media (max-width: 600px) {
   .about-us-section {
-    min-height: 80vh;
+    background-size: contain;
+    height: auto;
+    min-height: 350px;
   }
-  
+
   .about-us-container {
-    min-height: 80vh;
+    padding: 12px;
   }
-  
-  .about-us-image {
-    height: 80vh;
-  }
-  
-  .about-us-overlay {
-    padding-left: 16px;
-    padding-right: 16px;
-  }
-  
+
   .about-us-content {
-    padding: 16px 0;
+    padding: 12px;
   }
-  
+
   .about-us-title {
     font-size: clamp(20px, 5vw, 28px);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    margin-top: 0;
   }
-  
+
   .about-us-text p {
     font-size: clamp(12px, 3vw, 14px);
     margin-bottom: 12px;
@@ -176,31 +121,25 @@
 
 @media (max-width: 480px) {
   .about-us-section {
-    min-height: 70vh;
+    background-size: contain;
+    height: auto;
+    min-height: 300px;
   }
-  
+
   .about-us-container {
-    min-height: 70vh;
+    padding: 10px;
   }
-  
-  .about-us-image {
-    height: 70vh;
-  }
-  
-  .about-us-overlay {
-    padding-left: 12px;
-    padding-right: 12px;
-  }
-  
+
   .about-us-content {
-    padding: 12px 0;
+    padding: 10px;
   }
-  
+
   .about-us-title {
     font-size: clamp(18px, 4.5vw, 24px);
-    margin-bottom: 10px;
+    margin-bottom: 8px;
+    margin-top: 0;
   }
-  
+
   .about-us-text p {
     font-size: clamp(11px, 2.8vw, 13px);
     margin-bottom: 10px;
@@ -210,31 +149,25 @@
 
 @media (max-width: 360px) {
   .about-us-section {
-    min-height: 60vh;
+    background-size: contain;
+    height: auto;
+    min-height: 250px;
   }
-  
+
   .about-us-container {
-    min-height: 60vh;
+    padding: 8px;
   }
-  
-  .about-us-image {
-    height: 60vh;
-  }
-  
-  .about-us-overlay {
-    padding-left: 8px;
-    padding-right: 8px;
-  }
-  
+
   .about-us-content {
-    padding: 8px 0;
+    padding: 8px;
   }
-  
+
   .about-us-title {
     font-size: clamp(16px, 4vw, 20px);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
+    margin-top: 0;
   }
-  
+
   .about-us-text p {
     font-size: clamp(10px, 2.5vw, 12px);
     margin-bottom: 8px;

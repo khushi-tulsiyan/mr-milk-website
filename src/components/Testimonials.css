@@ -1,5 +1,5 @@
 .testimonials-section {
-  padding: 60px 0;
+  padding: 20px 0;
   background: white;
 }
 
@@ -32,6 +32,9 @@
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   border: 1px solid #e5e7eb;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 300px;
 }
 
 .testimonial-card:hover {
@@ -41,6 +44,7 @@
 
 .testimonial-content {
   margin-bottom: 25px;
+  flex: 1;
 }
 
 .testimonial-text {
@@ -125,6 +129,7 @@
   
   .testimonial-card {
     padding: 16px;
+    min-height: 250px;
   }
   
   .testimonial-text {
@@ -166,6 +171,7 @@
   
   .testimonial-card {
     padding: 14px;
+    min-height: 220px;
   }
   
   .testimonial-text {
@@ -211,6 +217,7 @@
   
   .testimonial-card {
     padding: 12px;
+    min-height: 200px;
   }
   
   .testimonial-text {
@@ -256,6 +263,7 @@
   
   .testimonial-card {
     padding: 10px;
+    min-height: 180px;
   }
   
   .testimonial-text {

@@ -14,6 +14,15 @@ const ProductGrid = () => {
     }
   }, [isSectionVisible, setDairyVisible]);
 
+  // ⭐ NEW: WhatsApp Order Handler
+  const handleWhatsAppOrder = (productName) => {
+    const phone = "917230920774";
+    const message = `Hello, I want to order ${productName}.`;
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+
+    window.open(url, "_blank");
+  };
+
   const dairyProducts = [
     {
       id: 1,
@@ -85,8 +94,6 @@ const ProductGrid = () => {
           <h2 className="products-title">Our Products</h2>
         </div>
 
-        {/* Ghee Products Row - Removed */}
-
         {/* Dairy Products Row */}
         <div className="product-row dairy-row stagger">
           {dairyProducts.map((product, index) => (
@@ -101,7 +108,15 @@ const ProductGrid = () => {
                   className="product-image"
                 />
               </div>
-              <button className="btn btn-primary buy-now-btn">BUY NOW</button>
+
+              {/* ⭐ UPDATED BUY NOW BUTTON WITH WHATSAPP FUNCTION */}
+              <button 
+                className="btn btn-primary buy-now-btn"
+                onClick={() => handleWhatsAppOrder(product.name)}
+              >
+                BUY NOW
+              </button>
+
               <div className="product-name">{product.name}</div>
               <div className="product-description">{product.description}</div>
               <div className="product-contact">Call +91 72309 20774</div>

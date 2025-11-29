@@ -465,7 +465,10 @@
   }
   
   .hero-text-overlay .hero-text {
-    margin-left: 4px;
+    /* Center text visually using flex alignment instead of margins for stable positioning across 360px-600px widths */
+    margin-left: -5px;
+    margin-top: -40px;
+
   }
   
   /* Further adjust product sizes for small mobile */

@@ -3,6 +3,7 @@
   background: no-repeat center center;
   background-size: cover;
   overflow: hidden;
+  padding-top: 0px;
 }
 
 .about-us-container {
@@ -23,7 +24,7 @@
 .about-us-content {
   text-align: left;
   color: black;
-  padding: 20px;
+  padding: 40px;
   max-width: 800px;
   background: transparent;
   opacity: 1;
@@ -51,6 +52,7 @@
   font-weight: bold;
   line-height: 1.6;
   margin-bottom: 20px;
+  margin-left: 20px;
   color: #333333;
   text-align: left;
   width: 100%;
@@ -65,30 +67,37 @@
   .about-us-section {
     background-size: contain;
     height: auto;
-    min-height: 400px;
+    min-height: 300px;
   }
 
   .about-us-container {
-    padding: 16px;
+    padding: 10px 20px 10px 0;
   }
 
   .about-us-content {
-    padding: 16px;
-    max-width: 100%;
+    padding: 20px 40px 20px 0;
+    margin-bottom: 0px;
+    padding-top: 0px;
   }
 
   .about-us-title {
-    font-size: clamp(24px, 6vw, 36px);
-    margin-bottom: 12px;
+    font-size: clamp(18px, 4.5vw, 24px);
+    margin-bottom: 8px;
     margin-top: 0;
-    text-align: center;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 10px;
   }
 
   .about-us-text p {
-    font-size: clamp(13px, 3.5vw, 16px);
-    margin-bottom: 14px;
-    text-align: center;
-    line-height: 1.5;
+    font-size: clamp(11px, 2.8vw, 13px);
+    margin-bottom: 10px;
+    line-height: 1.4;
+    margin-right: unset;
+    height: 50px;
+    padding-right: 70px;
+    width: 350px;
+    margin-top: 0px;
   }
 }
 
@@ -104,7 +113,7 @@
   }
 
   .about-us-content {
-    padding: 12px;
+    padding: 24px;
   }
 
   .about-us-title {
@@ -116,6 +125,7 @@
   .about-us-text p {
     font-size: clamp(12px, 3vw, 14px);
     margin-bottom: 12px;
+    margin-left: 12px;
   }
 }
 
@@ -127,23 +137,33 @@
   }
 
   .about-us-container {
-    padding: 10px;
+    padding: 10px 20px 10px 0;
   }
 
   .about-us-content {
-    padding: 10px;
+    padding: 20px 40px 20px 0;
+    margin-bottom: 0px;
+    padding-top: 0px;
   }
 
   .about-us-title {
     font-size: clamp(18px, 4.5vw, 24px);
     margin-bottom: 8px;
     margin-top: 0;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 10px;
   }
 
   .about-us-text p {
     font-size: clamp(11px, 2.8vw, 13px);
     margin-bottom: 10px;
     line-height: 1.4;
+    margin-right: unset;
+    height: 50px;
+    padding-right: 70px;
+    width: 350px;
+    margin-top: 0px;
   }
 }
 
@@ -155,21 +175,32 @@
   }
 
   .about-us-container {
-    padding: 8px;
+    padding: 8px 16px 8px 0;
   }
 
   .about-us-content {
-    padding: 8px;
+    padding: 16px 32px 16px 0;
+    margin-bottom: 0px;
+    padding-top: 0px;
+    padding-bottom: 0px;
   }
 
   .about-us-title {
     font-size: clamp(16px, 4vw, 20px);
     margin-bottom: 6px;
     margin-top: 0;
+    text-align: left;
+    margin-left: 100px;
+    margin-top: 10px;
   }
 
   .about-us-text p {
     font-size: clamp(10px, 2.5vw, 12px);
     margin-bottom: 8px;
+    margin-right: unset;
+    height: 50px;
+    padding-right: 70px;
+    width: 315px;
+    margin-top: 0px;
   }
 }

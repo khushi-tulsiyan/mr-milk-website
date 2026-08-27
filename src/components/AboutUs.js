@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './AboutUs.css';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const AboutUs = () => {
-  const [sectionRef, isVisible] = useScrollAnimation();
-  const [showContent, setShowContent] = useState(false);
+  const [sectionRef] = useScrollAnimation();
   const bgImage = process.env.PUBLIC_URL + '/images/mr/about-us-image.png';
-
-  useEffect(() => {
-    if (isVisible) {
-      const timer = setTimeout(() => {
-        setShowContent(true);
-      }, 300);
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible]);
 
   return (
     <section ref={sectionRef} className="about-us-section" style={{ backgroundImage: `url(${bgImage})` }}>

@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="footer-container">
         <img
           src="/images/mr/footer.png"
-          alt="M.R. MILK Footer"
+          alt="JFAM Footer"
           className="footer-image"
         />
       </div>

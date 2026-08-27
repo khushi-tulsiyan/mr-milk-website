@@ -3,38 +3,33 @@
   background: no-repeat center center;
   background-size: cover;
   overflow: hidden;
-  padding-top: 0px;
+  padding: clamp(2rem, 5vw, 4rem) 0;
 }
 
 .about-us-container {
-  position: relative;
-  width: 100%;
-  margin: 0;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(1rem, 3vw, 2rem);
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
-  border-radius: 16px;
-  padding: 20px;
+  align-items: center;
+  justify-content: center;
 }
 
-
-
-
-
 .about-us-content {
-  text-align: left;
-  color: black;
-  padding: 40px;
-  max-width: 800px;
-  background: transparent;
+  text-align: center;
+  color: #333;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  max-width: 900px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
   opacity: 1;
   transform: scale(1);
 }
 
 .about-us-title {
-  font-size: clamp(36px, 6vw, 56px);
+  font-size: clamp(1.75rem, 6vw, 2.5rem);
   font-weight: 700;
-  margin-bottom: 20px;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
   margin-top: 0;
   color: #2563eb;
   text-align: center;
@@ -48,11 +43,11 @@
 }
 
 .about-us-text p {
-  font-size: clamp(16px, 2.5vw, 20px);
-  font-weight: bold;
-  line-height: 1.6;
-  margin-bottom: 20px;
-  margin-left: 20px;
+  font-size: clamp(0.875rem, 2.5vw, 1.125rem);
+  font-weight: 500;
+  line-height: 1.8;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+  margin-left: 0;
   color: #333333;
   text-align: left;
   width: 100%;
@@ -62,145 +57,28 @@
   margin-bottom: 0;
 }
 
-/* Responsive Design */
+/* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .about-us-section {
-    background-size: contain;
-    height: auto;
-    min-height: 300px;
+    padding: clamp(1.5rem, 3vw, 2.5rem) 0;
   }
 
   .about-us-container {
-    padding: 10px 20px 10px 0;
+    padding: clamp(0.75rem, 2vw, 1.5rem);
   }
 
   .about-us-content {
-    padding: 20px 40px 20px 0;
-    margin-bottom: 0px;
-    padding-top: 0px;
+    padding: clamp(1rem, 3vw, 2rem);
   }
 
   .about-us-title {
-    font-size: clamp(18px, 4.5vw, 24px);
-    margin-bottom: 8px;
-    margin-top: 0;
-    text-align: left;
-    margin-left: 100px;
-    margin-top: 10px;
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
   }
 
   .about-us-text p {
-    font-size: clamp(11px, 2.8vw, 13px);
-    margin-bottom: 10px;
-    line-height: 1.4;
-    margin-right: unset;
-    height: 50px;
-    padding-right: 70px;
-    width: 350px;
-    margin-top: 0px;
-  }
-}
-
-@media (max-width: 600px) {
-  .about-us-section {
-    background-size: contain;
-    height: auto;
-    min-height: 350px;
-  }
-
-  .about-us-container {
-    padding: 12px;
-  }
-
-  .about-us-content {
-    padding: 24px;
-  }
-
-  .about-us-title {
-    font-size: clamp(20px, 5vw, 28px);
-    margin-bottom: 10px;
-    margin-top: 0;
-  }
-
-  .about-us-text p {
-    font-size: clamp(12px, 3vw, 14px);
-    margin-bottom: 12px;
-    margin-left: 12px;
-  }
-}
-
-@media (max-width: 480px) {
-  .about-us-section {
-    background-size: contain;
-    height: auto;
-    min-height: 300px;
-  }
-
-  .about-us-container {
-    padding: 10px 20px 10px 0;
-  }
-
-  .about-us-content {
-    padding: 20px 40px 20px 0;
-    margin-bottom: 0px;
-    padding-top: 0px;
-  }
-
-  .about-us-title {
-    font-size: clamp(18px, 4.5vw, 24px);
-    margin-bottom: 8px;
-    margin-top: 0;
-    text-align: left;
-    margin-left: 100px;
-    margin-top: 10px;
-  }
-
-  .about-us-text p {
-    font-size: clamp(11px, 2.8vw, 13px);
-    margin-bottom: 10px;
-    line-height: 1.4;
-    margin-right: unset;
-    height: 50px;
-    padding-right: 70px;
-    width: 350px;
-    margin-top: 0px;
-  }
-}
-
-@media (max-width: 360px) {
-  .about-us-section {
-    background-size: contain;
-    height: auto;
-    min-height: 250px;
-  }
-
-  .about-us-container {
-    padding: 8px 16px 8px 0;
-  }
-
-  .about-us-content {
-    padding: 16px 32px 16px 0;
-    margin-bottom: 0px;
-    padding-top: 0px;
-    padding-bottom: 0px;
-  }
-
-  .about-us-title {
-    font-size: clamp(16px, 4vw, 20px);
-    margin-bottom: 6px;
-    margin-top: 0;
-    text-align: left;
-    margin-left: 100px;
-    margin-top: 10px;
-  }
-
-  .about-us-text p {
-    font-size: clamp(10px, 2.5vw, 12px);
-    margin-bottom: 8px;
-    margin-right: unset;
-    height: 50px;
-    padding-right: 70px;
-    width: 315px;
-    margin-top: 0px;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    line-height: 1.6;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
   }
 }

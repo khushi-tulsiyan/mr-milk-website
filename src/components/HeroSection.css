@@ -70,6 +70,12 @@
   border-radius: 10px;
 }
 
+.brand-logo {
+  max-width: clamp(120px, 20vw, 280px);
+  height: auto;
+  object-fit: contain;
+}
+
 .hero-grid {
   display: grid;
   grid-template-columns: 1.05fr 1fr;

@@ -50,7 +50,7 @@ const HeroSection = () => {
       {/* Text overlay above SVG */}
       <div className="hero-text-overlay">
         <div className="brand-top anim anim-fade-slide">
-          <span className="brand-rainbow">M.R. MILK</span>
+          <img src="/images/mr/logo.png" alt="JFAM Logo" className="brand-logo" />
         </div>
         <div className="hero-text">
           <h1 className="hero-words">

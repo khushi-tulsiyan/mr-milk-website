@@ -27,61 +27,61 @@ const ProductGrid = () => {
     {
       id: 1,
       name: "RAW A2 COW MILK",
-      image: "/images/mr/raw a2 cow milk without bg.png",
+      image: "/images/mr/jfam_a2_cow_milk.png",
       description: "Premium A2 cow milk from Sahiwal cows, easy to digest and naturally pure"
     },
     {
       id: 2,
       name: "RAW BUFFALO MILK",
-      image: "/images/mr/BUFFALOA MILK.png",
+      image: "/images/mr/jfam_buffalo_milk.png",
       description: "Creamy buffalo milk, rich and wholesome for a healthy diet"
     },
     {
       id: 3,
       name: "RAW COW MILK",
-      image: "/images/mr/raw buffalo milk.png",
+      image: "/images/mr/jfam_cow_milk.png",
       description: "Pure cow's milk, fresh from the farm to your home"
     },
     {
       id: 4,
       name: "BUFFALO GHEE",
-      image: "/images/mr/Frame 32.png",
+      image: "/images/mr/jfam_buffalo_ghee.png",
       description: "Rich buffalo ghee, traditional and flavorful"
     },
     {
       id: 5,
       name: "BUFFALO CHAACH",
-      image: "/images/mr/Buffalo CHAACH.png",
+      image: "/images/mr/jfam_buffalo_chaach.png",
       description: "Traditional buffalo buttermilk, refreshing and nutritious"
     },
     {
       id: 6,
       name: "COW GHEE",
-      image: "/images/mr/COW GHEE.png",
+      image: "/images/mr/jfam_cow_ghee.png",
       description: "Pure cow ghee, rich in flavor and health benefits"
     },
     {
       id: 7,
       name: "COW CHAACH",
-      image: "/images/mr/COW CHAACH.png",
+      image: "/images/mr/jfam_cow_chaach.png",
       description: "Fresh cow buttermilk, cooling and digestive"
     },
     {
       id: 8,
       name: "DAHI",
-      image: "/images/mr/DAHI.png",
+      image: "/images/mr/jfam_dahi.png",
       description: "Fresh homemade yogurt, probiotic-rich and creamy"
     },
     {
       id: 9,
       name: "A2 COW GHEE",
-      image: "/images/mr/A2 cow ghee without bg.png",
+      image: "/images/mr/jfam_a2_cow_ghee.png",
       description: "Premium A2 cow ghee, made from the finest milk"
     },
     {
       id: 10,
       name: "PANEER",
-      image: "/images/mr/Group 47.png",
+      image: "/images/mr/jfam_paneer.png",
       description: "Fresh homemade paneer, soft and protein-rich"
     }
   ];

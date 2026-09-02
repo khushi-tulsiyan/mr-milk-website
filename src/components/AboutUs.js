@@ -4,7 +4,7 @@ import { useScrollAnimation } from '../hooks/useScrollAnimation';
 
 const AboutUs = () => {
   const [sectionRef] = useScrollAnimation();
-  const bgImage = process.env.PUBLIC_URL + '/images/mr/about-us-image.png';
+  const bgImage = process.env.PUBLIC_URL + '/images/mr/jfam_cow.png';
 
   return (
     <section ref={sectionRef} className="about-us-section" style={{ backgroundImage: `url(${bgImage})` }}>

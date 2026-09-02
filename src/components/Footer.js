@@ -9,6 +9,11 @@ const Footer = () => {
   return (
     <footer ref={footerRef} className="footer anim anim-fade-slide">
       <div className="footer-container">
+        <img
+          src="/images/mr/footer.png"
+          alt="JFAM Footer"
+          className="footer-image"
+        />
       </div>
     </footer>
   );

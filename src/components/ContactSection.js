@@ -8,11 +8,6 @@ const ContactSection = () => {
   return (
     <section ref={sectionRef} className="contact-section">
       <div className="contact-container">
-        <img
-          src="/images/mr/contact-us.png"
-          alt="Contact Us"
-          className="contact-image"
-        />
       </div>
     </section>
   );

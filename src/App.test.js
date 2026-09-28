@@ -17,6 +17,11 @@ test('ghee shop is separate; product catalogue keeps WhatsApp buttons', () => {
   expect(screen.getAllByText('BUY NOW')).toHaveLength(10);
 });
 
+test('account links are hidden when Supabase is not configured', () => {
+  render(<App />);
+  expect(screen.queryByText(/Sign in \/ Create account/)).not.toBeInTheDocument();
+});
+
 test('adding ghee opens the cart', () => {
   render(<App />);
   fireEvent.click(screen.getAllByText('Add to cart')[0]);

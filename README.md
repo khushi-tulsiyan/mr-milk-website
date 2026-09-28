@@ -90,3 +90,17 @@ The "Buy Ghee Online" section (`src/components/GheeShop.js`, below the product c
 1. In Vercel → Project → Settings → Environment Variables add `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` (see `.env.example`). Start with `rzp_test_...` keys, switch to live keys when ready, then redeploy.
 2. In Razorpay → Account & Settings → Payment Capture, keep **automatic capture** on.
 3. Local testing of payments needs the API, so run `npx vercel dev` (with keys in `.env.local`) instead of `npm start`.
+
+## Customer accounts and 90-day order storage (Supabase)
+
+- Customers can sign in from the Buy Ghee section or at checkout using an emailed code/link (no password). Their profile stores name, phone, address and pincode (pre-filled at checkout) and shows their paid orders.
+- Every ghee order (guest or signed-in) is stored in the `orders` table. A daily database job deletes orders older than **90 days**. Profiles stay until the customer's account is deleted (Supabase → Authentication → Users; this also deletes the profile).
+- If the Supabase variables are not set, the site still works: account links are hidden and orders are only recorded in Razorpay.
+
+### Setup
+1. Create a Supabase project (region: Mumbai).
+2. Supabase → SQL Editor → run `supabase/schema.sql`.
+3. Authentication → Sign In / Providers → keep **Email** enabled. Authentication → URL Configuration → set **Site URL** to the live site URL.
+4. Authentication → Email Templates → **Magic Link**: add `{{ .Token }}` to the email so customers get a code as well as the link.
+5. Add the four Supabase variables from `.env.example` in Vercel, then redeploy.
+6. Supabase's built-in email sender is limited to a few emails per hour; before launch, set up custom SMTP (e.g. Resend) under Authentication → SMTP Settings.

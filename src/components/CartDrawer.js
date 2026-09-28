@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './CartDrawer.css';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { formatINR, MAX_QTY } from '../utils/cart';
 
 const RAZORPAY_SRC = 'https://checkout.razorpay.com/v1/checkout.js';
@@ -17,10 +18,13 @@ function loadRazorpay() {
   });
 }
 
-async function postJSON(url, body) {
+async function postJSON(url, body, token) {
   const res = await fetch(url, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    },
     body: JSON.stringify(body),
   });
   const data = await res.json().catch(() => ({}));
@@ -35,6 +39,23 @@ const CartDrawer = () => {
   const [error, setError] = useState('');
   const [paying, setPaying] = useState(false);
   const [paymentId, setPaymentId] = useState('');
+  const [saveDetails, setSaveDetails] = useState(true);
+  const auth = useAuth();
+
+  // Prefill empty checkout fields from the signed-in customer's saved details,
+  // including when they sign in partway through checkout.
+  const { profile, user } = auth;
+  useEffect(() => {
+    if (step !== 'checkout') return;
+    const saved = profile || {};
+    setForm((f) => ({
+      name: f.name || saved.full_name || '',
+      phone: f.phone || saved.phone || '',
+      email: f.email || user?.email || '',
+      address: f.address || saved.address || '',
+      pincode: f.pincode || saved.pincode || '',
+    }));
+  }, [step, profile, user]);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -64,7 +85,7 @@ const CartDrawer = () => {
       const loaded = await loadRazorpay();
       if (!loaded) throw new Error('Could not load the payment window. Check your internet connection.');
 
-      const order = await postJSON('/api/create-order', { items, customer: form });
+      const order = await postJSON('/api/create-order', { items, customer: form }, auth.session?.access_token);
 
       const rzp = new window.Razorpay({
         key: order.keyId,
@@ -80,6 +101,10 @@ const CartDrawer = () => {
           try {
             const result = await postJSON('/api/verify-payment', response);
             setPaymentId(result.paymentId);
+            if (auth.user && saveDetails) {
+              auth.saveProfile({ full_name: form.name, phone: form.phone, address: form.address, pincode: form.pincode })
+                .catch((err) => console.error(err));
+            }
             clearCart();
             setForm(EMPTY_FORM);
             setStep('success');
@@ -184,6 +209,19 @@ const CartDrawer = () => {
             {step === 'checkout' && (
               <form className="cart-form" onSubmit={handlePay}>
                 <div className="cart-body">
+                  {auth.enabled && (
+                    <p className="cart-muted cart-account-hint">
+                      {auth.user ? `Signed in as ${auth.user.email}` : (
+                        <>
+                          Have an account?{' '}
+                          <button type="button" className="cart-link" onClick={auth.openAccount}>
+                            Sign in
+                          </button>{' '}
+                          to use your saved details.
+                        </>
+                      )}
+                    </p>
+                  )}
                   <label>Full name
                     <input name="name" value={form.name} onChange={updateField} required autoComplete="name" maxLength={100} />
                   </label>
@@ -202,6 +240,15 @@ const CartDrawer = () => {
                     <input name="pincode" value={form.pincode} onChange={updateField} required inputMode="numeric"
                       autoComplete="postal-code" pattern="\d{6}" maxLength={6} />
                   </label>
+                  {auth.user && (
+                    <label className="cart-checkbox">
+                      <input type="checkbox" checked={saveDetails} onChange={(e) => setSaveDetails(e.target.checked)} />
+                      Save these details to my account
+                    </label>
+                  )}
+                  <p className="cart-muted cart-privacy">
+                    We keep your order details for 90 days to process and deliver your order, then delete them.
+                  </p>
                   {error && <p className="cart-error" role="alert">{error}</p>}
                 </div>
                 <footer className="cart-footer">

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './GheeShop.css';
 import catalog from '../data/gheeCatalog.json';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { formatINR } from '../utils/cart';
 
 const GheeCard = ({ product }) => {
@@ -38,18 +39,27 @@ const GheeCard = ({ product }) => {
   );
 };
 
-const GheeShop = () => (
-  <section className="ghee-shop" id="buy-ghee">
-    <div className="ghee-shop-container">
-      <h2 className="ghee-shop-title">Buy Ghee Online</h2>
-      <p className="ghee-shop-subtitle">Pay securely online with UPI, cards or netbanking</p>
-      <div className="ghee-shop-grid">
-        {catalog.products.map((product) => (
-          <GheeCard key={product.id} product={product} />
-        ))}
+const GheeShop = () => {
+  const auth = useAuth();
+
+  return (
+    <section className="ghee-shop" id="buy-ghee">
+      <div className="ghee-shop-container">
+        <h2 className="ghee-shop-title">Buy Ghee Online</h2>
+        <p className="ghee-shop-subtitle">Pay securely online with UPI, cards or netbanking</p>
+        {auth.enabled && (
+          <button className="ghee-shop-account" onClick={auth.openAccount}>
+            {auth.user ? 'My account & orders' : 'Sign in / Create account'}
+          </button>
+        )}
+        <div className="ghee-shop-grid">
+          {catalog.products.map((product) => (
+            <GheeCard key={product.id} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 export default GheeShop;

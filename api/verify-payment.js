@@ -1,4 +1,5 @@
 const crypto = require('crypto');
+const { getSupabase } = require('./_lib/supabase');
 
 module.exports = async (req, res) => {
   if (req.method !== 'POST') {
@@ -33,5 +34,14 @@ module.exports = async (req, res) => {
   if (!verified) {
     return res.status(400).json({ verified: false, error: 'Payment verification failed' });
   }
+  const supabase = getSupabase();
+  if (supabase) {
+    const { error } = await supabase
+      .from('orders')
+      .update({ status: 'paid', razorpay_payment_id: paymentId, paid_at: new Date().toISOString() })
+      .eq('razorpay_order_id', orderId);
+    if (error) console.error('Failed to mark order paid', orderId, error);
+  }
+
   return res.status(200).json({ verified: true, orderId, paymentId });
 };

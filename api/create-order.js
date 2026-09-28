@@ -1,10 +1,40 @@
 const { priceCart, validateCustomer } = require('./_lib/pricing');
+const { getSupabase, getUserId } = require('./_lib/supabase');
 
 // Razorpay allows at most 256 characters per note value.
 function chunk(text, size) {
   const parts = [];
   for (let i = 0; i < text.length; i += size) parts.push(text.slice(i, i + size));
   return parts;
+}
+
+// Stores the order for 90 days (see supabase/schema.sql). A storage failure is
+// logged but doesn't block payment; Razorpay still has the details in its notes.
+async function saveOrder(req, razorpayOrderId, customer, pricing) {
+  const supabase = getSupabase();
+  if (!supabase) return;
+  try {
+    await insertOrder(supabase, req, razorpayOrderId, customer, pricing);
+  } catch (err) {
+    console.error('Failed to store order', razorpayOrderId, err);
+  }
+}
+
+async function insertOrder(supabase, req, razorpayOrderId, customer, pricing) {
+  const { error } = await supabase.from('orders').insert({
+    razorpay_order_id: razorpayOrderId,
+    user_id: await getUserId(req),
+    customer_name: customer.name,
+    phone: customer.phone,
+    email: customer.email || null,
+    address: customer.address,
+    pincode: customer.pincode,
+    items: pricing.lines,
+    subtotal: pricing.subtotal,
+    delivery: pricing.delivery,
+    total: pricing.total,
+  });
+  if (error) console.error('Failed to store order', razorpayOrderId, error);
 }
 
 module.exports = async (req, res) => {
@@ -63,6 +93,8 @@ module.exports = async (req, res) => {
       console.error('Razorpay order creation failed', order);
       return res.status(502).json({ error: 'Could not start payment. Please try again.' });
     }
+
+    await saveOrder(req, order.id, customer, pricing);
 
     return res.status(200).json({
       orderId: order.id,

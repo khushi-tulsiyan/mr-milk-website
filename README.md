@@ -78,3 +78,15 @@ The website faithfully implements the Figma design with:
 - Safari (latest)
 - Edge (latest)
 - Mobile browsers (iOS Safari, Chrome Mobile)
+## Ghee online ordering (cart + Razorpay)
+
+The "Buy Ghee Online" section (`src/components/GheeShop.js`, below the product catalogue) sells the three ghee products online. The product catalogue is unchanged and still orders via WhatsApp.
+
+- **Prices / sizes:** `src/data/gheeCatalog.json` (rupees). The browser and the payment API both read this file, so it is the only place to change prices. `deliveryCharge` is added to every order (0 = free).
+- **API (Vercel serverless functions):** `api/create-order.js` recomputes the total from the catalog and creates a Razorpay order; `api/verify-payment.js` checks Razorpay's payment signature.
+- **Orders:** every paid order appears in the Razorpay Dashboard → Transactions → Orders, with customer name, phone, address, pincode and items in the order's *Notes*.
+
+### Setup
+1. In Vercel → Project → Settings → Environment Variables add `RAZORPAY_KEY_ID` and `RAZORPAY_KEY_SECRET` (see `.env.example`). Start with `rzp_test_...` keys, switch to live keys when ready, then redeploy.
+2. In Razorpay → Account & Settings → Payment Capture, keep **automatic capture** on.
+3. Local testing of payments needs the API, so run `npx vercel dev` (with keys in `.env.local`) instead of `npm start`.

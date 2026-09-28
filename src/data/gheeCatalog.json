@@ -1,0 +1,37 @@
+{
+  "currency": "INR",
+  "deliveryCharge": 0,
+  "maxQuantityPerItem": 20,
+  "products": [
+    {
+      "id": "buffalo-ghee",
+      "name": "Buffalo Ghee",
+      "image": "/images/mr/jfam_buffalo_ghee.png",
+      "description": "Rich buffalo ghee, traditional and flavorful",
+      "variants": [
+        { "id": "500g", "label": "500 g", "price": 750 },
+        { "id": "1kg", "label": "1 kg", "price": 1500 }
+      ]
+    },
+    {
+      "id": "cow-ghee",
+      "name": "Cow Ghee",
+      "image": "/images/mr/jfam_cow_ghee.png",
+      "description": "Pure cow ghee, rich in flavor and health benefits",
+      "variants": [
+        { "id": "500g", "label": "500 g", "price": 650 },
+        { "id": "1kg", "label": "1 kg", "price": 1300 }
+      ]
+    },
+    {
+      "id": "a2-cow-ghee",
+      "name": "A2 Cow Ghee",
+      "image": "/images/mr/jfam_a2_cow_ghee.png",
+      "description": "Premium A2 cow ghee, made from the finest milk",
+      "variants": [
+        { "id": "500g", "label": "500 g", "price": 1200 },
+        { "id": "1kg", "label": "1 kg", "price": 2400 }
+      ]
+    }
+  ]
+}

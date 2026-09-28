@@ -1,0 +1,37 @@
+const crypto = require('crypto');
+
+module.exports = async (req, res) => {
+  if (req.method !== 'POST') {
+    res.setHeader('Allow', 'POST');
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  const keySecret = process.env.RAZORPAY_KEY_SECRET;
+  if (!keySecret) {
+    return res.status(500).json({ error: 'Payments are not configured yet' });
+  }
+
+  const {
+    razorpay_order_id: orderId,
+    razorpay_payment_id: paymentId,
+    razorpay_signature: signature,
+  } = req.body || {};
+
+  if (![orderId, paymentId, signature].every((v) => typeof v === 'string' && v)) {
+    return res.status(400).json({ verified: false, error: 'Missing payment details' });
+  }
+
+  const expected = crypto
+    .createHmac('sha256', keySecret)
+    .update(`${orderId}|${paymentId}`)
+    .digest('hex');
+
+  const a = Buffer.from(expected);
+  const b = Buffer.from(signature);
+  const verified = a.length === b.length && crypto.timingSafeEqual(a, b);
+
+  if (!verified) {
+    return res.status(400).json({ verified: false, error: 'Payment verification failed' });
+  }
+  return res.status(200).json({ verified: true, orderId, paymentId });
+};

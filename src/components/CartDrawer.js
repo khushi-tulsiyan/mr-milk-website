@@ -3,9 +3,11 @@ import './CartDrawer.css';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { formatINR, MAX_QTY } from '../utils/cart';
+import INDIAN_STATES from '../data/indianStates.json';
 
 const RAZORPAY_SRC = 'https://checkout.razorpay.com/v1/checkout.js';
-const EMPTY_FORM = { name: '', phone: '', email: '', address: '', pincode: '' };
+const EMPTY_FORM = { name: '', phone: '', email: '', address: '', city: '', state: '', pincode: '' };
+const NO_QUOTE = { status: 'idle' }; // idle | loading | ok | error
 
 function loadRazorpay() {
   if (window.Razorpay) return Promise.resolve(true);
@@ -40,6 +42,7 @@ const CartDrawer = () => {
   const [paying, setPaying] = useState(false);
   const [paymentId, setPaymentId] = useState('');
   const [saveDetails, setSaveDetails] = useState(true);
+  const [quote, setQuote] = useState(NO_QUOTE);
   const auth = useAuth();
 
   // Prefill empty checkout fields from the signed-in customer's saved details,
@@ -53,9 +56,36 @@ const CartDrawer = () => {
       phone: f.phone || saved.phone || '',
       email: f.email || user?.email || '',
       address: f.address || saved.address || '',
+      city: f.city || saved.city || '',
+      state: f.state || saved.state || '',
       pincode: f.pincode || saved.pincode || '',
     }));
   }, [step, profile, user]);
+
+  // Live delivery charge + serviceability from Shiprocket for the entered pincode.
+  useEffect(() => {
+    if (step !== 'checkout' || !/^[1-9]\d{5}$/.test(form.pincode) || !items.length) {
+      setQuote(NO_QUOTE);
+      return undefined;
+    }
+    let cancelled = false;
+    setQuote({ status: 'loading' });
+    const timer = setTimeout(async () => {
+      try {
+        const q = await postJSON('/api/shipping-quote', { items, pincode: form.pincode });
+        if (!cancelled) setQuote({ status: 'ok', ...q });
+      } catch (err) {
+        if (!cancelled) setQuote({ status: 'error', error: err.message });
+      }
+    }, 400);
+    return () => {
+      cancelled = true;
+      clearTimeout(timer);
+    };
+  }, [step, form.pincode, items]);
+
+  const delivery = quote.status === 'ok' ? quote.delivery : null;
+  const total = summary.subtotal + (delivery || 0);
 
   useEffect(() => {
     if (!isOpen) return undefined;
@@ -86,6 +116,7 @@ const CartDrawer = () => {
       if (!loaded) throw new Error('Could not load the payment window. Check your internet connection.');
 
       const order = await postJSON('/api/create-order', { items, customer: form }, auth.session?.access_token);
+      if (order.delivery !== quote.delivery) setQuote((q) => ({ ...q, delivery: order.delivery }));
 
       const rzp = new window.Razorpay({
         key: order.keyId,
@@ -102,7 +133,10 @@ const CartDrawer = () => {
             const result = await postJSON('/api/verify-payment', response);
             setPaymentId(result.paymentId);
             if (auth.user && saveDetails) {
-              auth.saveProfile({ full_name: form.name, phone: form.phone, address: form.address, pincode: form.pincode })
+              auth.saveProfile({
+                full_name: form.name, phone: form.phone, address: form.address,
+                city: form.city, state: form.state, pincode: form.pincode,
+              })
                 .catch((err) => console.error(err));
             }
             clearCart();
@@ -197,7 +231,7 @@ const CartDrawer = () => {
                 </div>
                 {summary.lines.length > 0 && (
                   <footer className="cart-footer">
-                    <Totals summary={summary} />
+                    <Totals subtotal={summary.subtotal} />
                     <button className="btn btn-primary cart-cta" onClick={() => setStep('checkout')}>
                       Checkout
                     </button>
@@ -229,17 +263,30 @@ const CartDrawer = () => {
                     <input name="phone" value={form.phone} onChange={updateField} required type="tel"
                       inputMode="numeric" autoComplete="tel" placeholder="10-digit mobile" />
                   </label>
-                  <label>Email (optional)
-                    <input name="email" value={form.email} onChange={updateField} type="email" autoComplete="email" />
+                  <label>Email
+                    <input name="email" value={form.email} onChange={updateField} required type="email" autoComplete="email" />
                   </label>
                   <label>Delivery address
                     <textarea name="address" value={form.address} onChange={updateField} required rows={3}
                       autoComplete="street-address" maxLength={250} />
                   </label>
-                  <label>Pincode
-                    <input name="pincode" value={form.pincode} onChange={updateField} required inputMode="numeric"
-                      autoComplete="postal-code" pattern="\d{6}" maxLength={6} />
+                  <div className="cart-row">
+                    <label>City
+                      <input name="city" value={form.city} onChange={updateField} required autoComplete="address-level2" maxLength={60} />
+                    </label>
+                    <label>Pincode
+                      <input name="pincode" value={form.pincode} onChange={updateField} required inputMode="numeric"
+                        autoComplete="postal-code" pattern="\d{6}" maxLength={6} />
+                    </label>
+                  </div>
+                  <label>State
+                    <input name="state" value={form.state} onChange={updateField} required list="indian-states"
+                      autoComplete="address-level1" maxLength={60} />
+                    <datalist id="indian-states">
+                      {INDIAN_STATES.map((st) => <option key={st} value={st} />)}
+                    </datalist>
                   </label>
+                  <DeliveryStatus quote={quote} />
                   {auth.user && (
                     <label className="cart-checkbox">
                       <input type="checkbox" checked={saveDetails} onChange={(e) => setSaveDetails(e.target.checked)} />
@@ -252,9 +299,10 @@ const CartDrawer = () => {
                   {error && <p className="cart-error" role="alert">{error}</p>}
                 </div>
                 <footer className="cart-footer">
-                  <Totals summary={summary} />
-                  <button type="submit" className="btn btn-primary cart-cta" disabled={paying || !summary.lines.length}>
-                    {paying ? 'Processing…' : `Pay ${formatINR(summary.total)}`}
+                  <Totals subtotal={summary.subtotal} delivery={delivery} />
+                  <button type="submit" className="btn btn-primary cart-cta"
+                    disabled={paying || !summary.lines.length || quote.status !== 'ok'}>
+                    {paying ? 'Processing…' : quote.status === 'ok' ? `Pay ${formatINR(total)}` : 'Enter pincode to continue'}
                   </button>
                   <button type="button" className="cart-back" onClick={() => setStep('cart')} disabled={paying}>
                     ← Back to cart
@@ -269,12 +317,30 @@ const CartDrawer = () => {
   );
 };
 
-const Totals = ({ summary }) => (
+// delivery: null = not quoted yet, 0 = free.
+const Totals = ({ subtotal, delivery = null }) => (
   <dl className="cart-totals">
-    <div><dt>Subtotal</dt><dd>{formatINR(summary.subtotal)}</dd></div>
-    <div><dt>Delivery</dt><dd>{summary.delivery ? formatINR(summary.delivery) : 'Free'}</dd></div>
-    <div className="cart-grand"><dt>Total</dt><dd>{formatINR(summary.total)}</dd></div>
+    <div><dt>Subtotal</dt><dd>{formatINR(subtotal)}</dd></div>
+    <div>
+      <dt>Delivery</dt>
+      <dd>{delivery === null ? 'Calculated at checkout' : delivery ? formatINR(delivery) : 'Free'}</dd>
+    </div>
+    <div className="cart-grand"><dt>Total</dt><dd>{formatINR(subtotal + (delivery || 0))}</dd></div>
   </dl>
 );
+
+const DeliveryStatus = ({ quote }) => {
+  if (quote.status === 'loading') return <p className="cart-muted cart-delivery">Checking delivery to your pincode…</p>;
+  if (quote.status === 'error') return <p className="cart-error cart-delivery" role="alert">{quote.error}</p>;
+  if (quote.status !== 'ok') return null;
+  const eta = quote.etd && new Date(quote.etd.replace(' ', 'T'));
+  return (
+    <p className="cart-delivery cart-delivery-ok">
+      ✓ We deliver here{quote.courier ? ` via ${quote.courier}` : ''}
+      {eta && !Number.isNaN(eta.getTime())
+        ? `, expected by ${eta.toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })}` : ''}
+    </p>
+  );
+};
 
 export default CartDrawer;

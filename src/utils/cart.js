@@ -7,8 +7,9 @@ export const formatINR = (amount) => `₹${amount.toLocaleString('en-IN')}`;
 export const findProduct = (productId) =>
   catalog.products.find((p) => p.id === productId);
 
-// Display totals for the cart. The server recomputes the charged amount itself;
-// items no longer in the catalog are skipped here.
+// Display subtotal for the cart; delivery is quoted by Shiprocket at checkout
+// and the server recomputes the charged amount. Items no longer in the
+// catalog are skipped here.
 export function cartSummary(items) {
   const lines = items.flatMap((item) => {
     const product = findProduct(item.productId);
@@ -24,9 +25,8 @@ export function cartSummary(items) {
     }];
   });
   const subtotal = lines.reduce((sum, l) => sum + l.lineTotal, 0);
-  const delivery = lines.length ? catalog.deliveryCharge : 0;
   const count = lines.reduce((sum, l) => sum + l.quantity, 0);
-  return { lines, subtotal, delivery, total: subtotal + delivery, count };
+  return { lines, subtotal, count };
 }
 
 export function cartReducer(items, action) {

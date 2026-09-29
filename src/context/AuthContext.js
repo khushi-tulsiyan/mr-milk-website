@@ -24,7 +24,7 @@ export function AuthProvider({ children }) {
     }
     supabase
       .from('profiles')
-      .select('full_name, phone, address, pincode')
+      .select('full_name, phone, address, city, state, pincode')
       .eq('id', userId)
       .maybeSingle()
       .then(({ data, error }) => {
@@ -39,6 +39,8 @@ export function AuthProvider({ children }) {
       full_name: fields.full_name?.trim() || null,
       phone: fields.phone?.trim() || null,
       address: fields.address?.trim() || null,
+      city: fields.city?.trim() || null,
+      state: fields.state?.trim() || null,
       pincode: fields.pincode?.trim() || null,
       updated_at: new Date().toISOString(),
     };

@@ -293,3 +293,19 @@
   font-size: 12px;
   margin: 0 0 10px;
 }
+
+.cart-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.cart-delivery {
+  font-size: 14px;
+  margin: -4px 0 14px;
+}
+
+.cart-delivery-ok {
+  color: #16a34a;
+  font-weight: 600;
+}

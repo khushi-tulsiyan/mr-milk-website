@@ -104,3 +104,16 @@ The "Buy Ghee Online" section (`src/components/GheeShop.js`, below the product c
 4. Authentication → Email Templates → **Magic Link**: add `{{ .Token }}` to the email so customers get a code as well as the link.
 5. Add the four Supabase variables from `.env.example` in Vercel, then redeploy.
 6. Supabase's built-in email sender is limited to a few emails per hour; before launch, set up custom SMTP (e.g. Resend) under Authentication → SMTP Settings.
+
+## Shipping (Shiprocket)
+
+- **Checkout:** once the customer enters a pincode, `api/shipping-quote.js` asks Shiprocket which couriers deliver there. The delivery charge is the rate of Shiprocket's recommended courier (else the cheapest), rounded up to the rupee. Unserviceable pincodes cannot pay. `api/create-order.js` re-quotes on the server, so the charged amount never comes from the browser.
+- **After payment:** `api/verify-payment.js` creates a **prepaid order in Shiprocket** (order ID = Razorpay order ID). Assign a courier, schedule pickup and print the label in the Shiprocket panel. If the push fails, the payment still succeeds and the reason is saved in `orders.shiprocket_error` in Supabase for manual follow-up. Pushing orders requires Supabase to be configured.
+- **Weights/boxes:** `weightKg` (packed) and `boxCm` [L, B, H] per size in `src/data/gheeCatalog.json`. Multiple jars are treated as stacked in one box. **The current values are estimates.**
+- Checkout now requires email, city and state (Shiprocket needs them).
+
+### Setup
+1. Shiprocket → Settings → API → Configure → create an API user.
+2. Add the four `SHIPROCKET_*` variables from `.env.example` in Vercel and redeploy.
+3. Re-run `supabase/schema.sql` in Supabase (adds city/state and Shiprocket columns; safe to re-run).
+4. Keep enough Shiprocket wallet balance for shipping charges.

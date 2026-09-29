@@ -4,6 +4,7 @@ import './AccountPanel.css';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../context/AuthContext';
 import { formatINR } from '../utils/cart';
+import INDIAN_STATES from '../data/indianStates.json';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -77,7 +78,7 @@ const SignIn = () => {
 
 const ProfileForm = () => {
   const { profile, saveProfile } = useAuth();
-  const [form, setForm] = useState({ full_name: '', phone: '', address: '', pincode: '' });
+  const [form, setForm] = useState({ full_name: '', phone: '', address: '', city: '', state: '', pincode: '' });
   const [status, setStatus] = useState('');
 
   useEffect(() => {
@@ -86,6 +87,8 @@ const ProfileForm = () => {
         full_name: profile.full_name || '',
         phone: profile.phone || '',
         address: profile.address || '',
+        city: profile.city || '',
+        state: profile.state || '',
         pincode: profile.pincode || '',
       });
     }
@@ -117,9 +120,20 @@ const ProfileForm = () => {
       <label>Delivery address
         <textarea name="address" value={form.address} onChange={update} rows={3} autoComplete="street-address" maxLength={250} />
       </label>
-      <label>Pincode
-        <input name="pincode" value={form.pincode} onChange={update} inputMode="numeric" autoComplete="postal-code"
-          pattern="\d{6}" maxLength={6} />
+      <div className="cart-row">
+        <label>City
+          <input name="city" value={form.city} onChange={update} autoComplete="address-level2" maxLength={60} />
+        </label>
+        <label>Pincode
+          <input name="pincode" value={form.pincode} onChange={update} inputMode="numeric" autoComplete="postal-code"
+            pattern="\d{6}" maxLength={6} />
+        </label>
+      </div>
+      <label>State
+        <input name="state" value={form.state} onChange={update} list="profile-states" autoComplete="address-level1" maxLength={60} />
+        <datalist id="profile-states">
+          {INDIAN_STATES.map((st) => <option key={st} value={st} />)}
+        </datalist>
       </label>
       <button type="submit" className="btn btn-primary cart-cta">Save details</button>
       {status && <p className="account-status" role="status">{status}</p>}

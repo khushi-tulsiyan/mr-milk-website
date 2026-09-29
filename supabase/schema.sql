@@ -9,6 +9,8 @@ create table if not exists public.profiles (
   full_name text,
   phone text,
   address text,
+  city text,
+  state text,
   pincode text,
   updated_at timestamptz not null default now()
 );
@@ -41,14 +43,30 @@ create table if not exists public.orders (
   phone text not null,
   email text,
   address text not null,
+  city text,
+  state text,
   pincode text not null,
   items jsonb not null,
+  package jsonb,
   subtotal integer not null,
   delivery integer not null,
   total integer not null,
   created_at timestamptz not null default now(),
-  paid_at timestamptz
+  paid_at timestamptz,
+  shiprocket_order_id text,
+  shiprocket_shipment_id text,
+  shiprocket_error text
 );
+
+-- Columns added with the Shiprocket integration (for databases created earlier).
+alter table public.profiles add column if not exists city text;
+alter table public.profiles add column if not exists state text;
+alter table public.orders add column if not exists city text;
+alter table public.orders add column if not exists state text;
+alter table public.orders add column if not exists package jsonb;
+alter table public.orders add column if not exists shiprocket_order_id text;
+alter table public.orders add column if not exists shiprocket_shipment_id text;
+alter table public.orders add column if not exists shiprocket_error text;
 
 create index if not exists orders_user_id_idx on public.orders (user_id, created_at desc);
 create index if not exists orders_created_at_idx on public.orders (created_at);

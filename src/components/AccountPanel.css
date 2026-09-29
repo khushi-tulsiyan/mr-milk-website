@@ -1,0 +1,83 @@
+.account-intro {
+  font-size: 15px;
+  color: #333;
+  line-height: 1.5;
+  margin: 0 0 16px;
+}
+
+.account-email {
+  margin: 0 0 12px;
+}
+
+.account-tabs {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.account-tabs button {
+  flex: 1;
+  min-height: 44px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  font-weight: 600;
+  font-size: 15px;
+  color: #6b7280;
+  cursor: pointer;
+}
+
+.account-tabs button.active {
+  color: #2563eb;
+  border-bottom-color: #2563eb;
+}
+
+.account-profile {
+  flex: none;
+}
+
+.account-status {
+  font-size: 14px;
+  color: #16a34a;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+.account-orders {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.account-order {
+  padding: 12px 0;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.account-order-head {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.account-order-items {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 4px;
+}
+
+.account-note {
+  margin: 0;
+  text-align: center;
+}
+
+.account-link {
+  background: none;
+  border: none;
+  color: #2563eb;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 8px;
+  min-height: 44px;
+}

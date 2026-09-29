@@ -1,4 +1,5 @@
 {
+  "_shippingNote": "weightKg = packed weight incl. jar + box; box in cm. ESTIMATES - replace with real values. deliveryCharge is only used if Shiprocket is not configured.",
   "currency": "INR",
   "deliveryCharge": 0,
   "maxQuantityPerItem": 20,
@@ -9,8 +10,8 @@
       "image": "/images/mr/jfam_buffalo_ghee.png",
       "description": "Rich buffalo ghee, traditional and flavorful",
       "variants": [
-        { "id": "500g", "label": "500 g", "price": 750 },
-        { "id": "1kg", "label": "1 kg", "price": 1500 }
+        { "id": "500g", "label": "500 g", "price": 750, "weightKg": 0.65, "boxCm": [15, 10, 10] },
+        { "id": "1kg", "label": "1 kg", "price": 1500, "weightKg": 1.2, "boxCm": [18, 12, 12] }
       ]
     },
     {
@@ -19,8 +20,8 @@
       "image": "/images/mr/jfam_cow_ghee.png",
       "description": "Pure cow ghee, rich in flavor and health benefits",
       "variants": [
-        { "id": "500g", "label": "500 g", "price": 650 },
-        { "id": "1kg", "label": "1 kg", "price": 1300 }
+        { "id": "500g", "label": "500 g", "price": 650, "weightKg": 0.65, "boxCm": [15, 10, 10] },
+        { "id": "1kg", "label": "1 kg", "price": 1300, "weightKg": 1.2, "boxCm": [18, 12, 12] }
       ]
     },
     {
@@ -29,8 +30,8 @@
       "image": "/images/mr/jfam_a2_cow_ghee.png",
       "description": "Premium A2 cow ghee, made from the finest milk",
       "variants": [
-        { "id": "500g", "label": "500 g", "price": 1200 },
-        { "id": "1kg", "label": "1 kg", "price": 2400 }
+        { "id": "500g", "label": "500 g", "price": 1200, "weightKg": 0.65, "boxCm": [15, 10, 10] },
+        { "id": "1kg", "label": "1 kg", "price": 2400, "weightKg": 1.2, "boxCm": [18, 12, 12] }
       ]
     }
   ]

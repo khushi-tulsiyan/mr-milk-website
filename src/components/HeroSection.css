@@ -74,6 +74,10 @@
   max-width: clamp(120px, 20vw, 280px);
   height: auto;
   object-fit: contain;
+  /* Logo file is pale blue; render it white with a soft shadow so it reads on
+     the sky. scale() enlarges it without shifting the hero text below. */
+  filter: brightness(0) invert(1) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.25));
+  transform: scale(1.4);
 }
 
 .hero-grid {

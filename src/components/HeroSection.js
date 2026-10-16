@@ -3,6 +3,7 @@ import './HeroSection.css';
 import '../styles/animations.css';
 import { useScrollAnimation } from '../hooks/useScrollAnimation';
 import ProductGrid from './ProductGrid';
+import GheeShop from './GheeShop';
 
 const HeroSection = () => {
   const [frameRef, isVisible] = useScrollAnimation();
@@ -73,6 +74,9 @@ const HeroSection = () => {
           />
         </div>
       </div>
+
+      {/* Online ghee shop, above the full product catalogue */}
+      <GheeShop />
 
       {/* ProductGrid component after Why Choose Us animation */}
       <ProductGrid />

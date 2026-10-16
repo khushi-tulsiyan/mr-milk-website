@@ -5,7 +5,7 @@ import { useScrollAnimation, useStaggeredAnimation } from '../hooks/useScrollAni
 
 const ProductGrid = () => {
   const [sectionRef, isSectionVisible] = useScrollAnimation();
-  const [setDairyVisible, visibleDairyItems] = useStaggeredAnimation(10, 0.2);
+  const [setDairyVisible, visibleDairyItems] = useStaggeredAnimation(7, 0.2);
 
   React.useEffect(() => {
     if (isSectionVisible) {
@@ -43,22 +43,10 @@ const ProductGrid = () => {
       description: "Pure cow's milk, fresh from the farm to your home"
     },
     {
-      id: 4,
-      name: "BUFFALO GHEE",
-      image: "/images/mr/jfam_buffalo_ghee.png",
-      description: "Rich buffalo ghee, traditional and flavorful"
-    },
-    {
       id: 5,
       name: "BUFFALO CHAACH",
       image: "/images/mr/jfam_buffalo_chaach.png",
       description: "Traditional buffalo buttermilk, refreshing and nutritious"
-    },
-    {
-      id: 6,
-      name: "COW GHEE",
-      image: "/images/mr/jfam_cow_ghee.png",
-      description: "Pure cow ghee, rich in flavor and health benefits"
     },
     {
       id: 7,
@@ -71,12 +59,6 @@ const ProductGrid = () => {
       name: "DAHI",
       image: "/images/mr/jfam_dahi.png",
       description: "Fresh homemade yogurt, probiotic-rich and creamy"
-    },
-    {
-      id: 9,
-      name: "A2 COW GHEE",
-      image: "/images/mr/jfam_a2_cow_ghee.png",
-      description: "Premium A2 cow ghee, made from the finest milk"
     },
     {
       id: 10,

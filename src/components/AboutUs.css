@@ -57,6 +57,24 @@
   margin-bottom: 0;
 }
 
+.about-us-highlight {
+  margin: clamp(1rem, 2.5vw, 1.75rem) auto 0;
+  padding: 0.6em 1.4em;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #1e3a8a;
+  font-size: clamp(1rem, 2.6vw, 1.35rem);
+  font-weight: 600;
+  text-align: center;
+}
+
+.about-us-highlight strong {
+  color: #2563eb;
+  font-weight: 800;
+}
+
 /* Responsive adjustments for smaller screens */
 @media (max-width: 768px) {
   .about-us-section {

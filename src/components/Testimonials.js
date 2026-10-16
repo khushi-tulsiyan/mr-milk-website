@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import './Testimonials.css';
 import '../styles/animations.css';
 import { useScrollAnimation, useStaggeredAnimation } from '../hooks/useScrollAnimation';
+
+// Width of one card plus the gap: how far the track scrolls per slide.
+const cardStep = (track) => {
+  const card = track?.children[0];
+  if (!card) return 0;
+  return card.offsetWidth + (parseFloat(getComputedStyle(track).columnGap) || 0);
+};
 
 const Testimonials = () => {
   const [sectionRef, isSectionVisible] = useScrollAnimation();
@@ -63,37 +70,113 @@ const Testimonials = () => {
     ));
   };
 
+  // Slider: a scroll-snapping row (swipe on touch), with arrows, dots and
+  // auto-advance that pauses while the visitor hovers, focuses or touches it.
+  const trackRef = useRef(null);
+  const [page, setPage] = useState(0);
+  const [pageCount, setPageCount] = useState(testimonials.length);
+  const [paused, setPaused] = useState(false);
+
+  const measure = useCallback(() => {
+    const track = trackRef.current;
+    const step = cardStep(track);
+    if (!track || !step) return;
+    const perView = Math.max(1, Math.round((track.clientWidth + 1) / step));
+    setPageCount(Math.max(1, testimonials.length - perView + 1));
+    setPage(Math.round(track.scrollLeft / step));
+  }, [testimonials.length]);
+
+  useEffect(() => {
+    measure();
+    window.addEventListener('resize', measure);
+    return () => window.removeEventListener('resize', measure);
+  }, [measure]);
+
+  const goTo = useCallback((target) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const next = (target + pageCount) % pageCount;
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    track.scrollTo?.({ left: next * cardStep(track), behavior: reduceMotion ? 'auto' : 'smooth' });
+    setPage(next);
+  }, [pageCount]);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    if (paused || reduceMotion || pageCount < 2 || !isSectionVisible) return undefined;
+    const timer = setInterval(() => goTo(page + 1), 5000);
+    return () => clearInterval(timer);
+  }, [paused, page, pageCount, goTo, isSectionVisible]);
+
+  const onScroll = () => {
+    const step = cardStep(trackRef.current);
+    if (step) setPage(Math.round(trackRef.current.scrollLeft / step));
+  };
+
   return (
     <section ref={sectionRef} className="testimonials-section">
       <div className="container">
         <h2 className="section-title anim anim-fade-slide">Customer Feedbacks</h2>
-        
-        <div className="testimonials-grid stagger">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={testimonial.id} 
-              className={`testimonial-card ${visibleTestimonials.includes(index) ? 'visible' : ''}`}
-            >
-              <div className="testimonial-content">
-                <p className="testimonial-text">"{testimonial.text}"</p>
-              </div>
-              
-              <div className="testimonial-footer">
-                <div className="user-info">
-                  <div className="user-avatar">
-                    <div className="avatar-placeholder"></div>
-                  </div>
-                  <div className="user-details">
-                    <div className="user-name">{testimonial.name}</div>
-                    <div className="user-rating">
-                      {renderStars(testimonial.rating)}
+
+        <div
+          className="testimonials-slider"
+          role="region"
+          aria-roledescription="carousel"
+          aria-label="Customer reviews"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onFocus={() => setPaused(true)}
+          onBlur={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+        >
+          <button className="slider-arrow prev" onClick={() => goTo(page - 1)} aria-label="Previous reviews">‹</button>
+
+          <div className="testimonials-track" ref={trackRef} onScroll={onScroll}>
+            {testimonials.map((testimonial, index) => (
+              <div
+                key={testimonial.id}
+                className={`testimonial-card ${visibleTestimonials.includes(index) ? 'visible' : ''}`}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Review ${index + 1} of ${testimonials.length}`}
+              >
+                <div className="testimonial-content">
+                  <p className="testimonial-text">"{testimonial.text}"</p>
+                </div>
+
+                <div className="testimonial-footer">
+                  <div className="user-info">
+                    <div className="user-avatar">
+                      <div className="avatar-placeholder"></div>
+                    </div>
+                    <div className="user-details">
+                      <div className="user-name">{testimonial.name}</div>
+                      <div className="user-rating" aria-label={`${testimonial.rating} out of 5 stars`}>
+                        {renderStars(testimonial.rating)}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
+          </div>
+
+          <button className="slider-arrow next" onClick={() => goTo(page + 1)} aria-label="Next reviews">›</button>
         </div>
+
+        {pageCount > 1 && (
+          <div className="slider-dots">
+            {Array.from({ length: pageCount }, (_, i) => (
+              <button
+                key={i}
+                className={`slider-dot ${i === page ? 'active' : ''}`}
+                onClick={() => goTo(i)}
+                aria-label={`Show review ${i + 1}`}
+                aria-current={i === page}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

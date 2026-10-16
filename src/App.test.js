@@ -10,11 +10,12 @@ beforeAll(() => {
   };
 });
 
-test('ghee shop is separate; product catalogue keeps WhatsApp buttons', () => {
+test('ghee is sold only in its own section; catalogue keeps WhatsApp buttons for the rest', () => {
   render(<App />);
   expect(screen.getByText('Buy Ghee Online')).toBeInTheDocument();
   expect(screen.getAllByText('Add to cart')).toHaveLength(3);
-  expect(screen.getAllByText('BUY NOW')).toHaveLength(10);
+  expect(screen.getAllByText('BUY NOW')).toHaveLength(7);
+  expect(screen.queryByText('COW GHEE')).not.toBeInTheDocument();
 });
 
 test('account links are hidden when Supabase is not configured', () => {
@@ -76,4 +77,21 @@ test('unserviceable pincode keeps payment disabled', async () => {
   fireEvent.change(screen.getByLabelText('Pincode'), { target: { value: '999999' } });
   expect(await screen.findByText('Sorry, we do not deliver to this pincode yet.')).toBeInTheDocument();
   expect(screen.getByText('Enter pincode to continue')).toBeDisabled();
+});
+
+test('reviews are in a slider with controls, and About Us shows the customer count', () => {
+  render(<App />);
+  expect(screen.getByRole('region', { name: 'Customer reviews' })).toBeInTheDocument();
+  expect(screen.getAllByRole('group', { name: /Review \d of 6/ })).toHaveLength(6);
+  expect(screen.getByLabelText('Next reviews')).toBeInTheDocument();
+  expect(screen.getByLabelText('Previous reviews')).toBeInTheDocument();
+  expect(screen.getByText(/200\+ customers/)).toBeInTheDocument();
+  expect(screen.queryByText(/100\+ customers/)).not.toBeInTheDocument();
+});
+
+test('footer links to JFAM Instagram in a new tab', () => {
+  render(<App />);
+  const link = screen.getByRole('link', { name: 'Follow JFAM on Instagram' });
+  expect(link).toHaveAttribute('href', 'https://www.instagram.com/jfam.milk/');
+  expect(link).toHaveAttribute('target', '_blank');
 });

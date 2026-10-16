@@ -15,7 +15,15 @@ const Footer = () => {
           className="footer-image"
         />
         <img src="/images/mr/logo.png" alt="JFAM" className="footer-logo" />
-        {/* The social icons are part of footer.png; this link sits over the Instagram one. */}
+        {/* The social icons are part of footer.png; these links sit over them. */}
+        <a
+          href="https://www.facebook.com/share/194yDPixnP/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="footer-social footer-facebook"
+          aria-label="Follow JFAM on Facebook"
+          title="Facebook"
+        />
         <a
           href="https://www.instagram.com/jfam.milk/"
           target="_blank"

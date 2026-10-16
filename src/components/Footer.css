@@ -22,6 +22,45 @@
   max-width: 100%;
 }
 
+/* JFAM logo at the top centre of the blue band (where footer.png had the
+   wordmark). Same treatment as the hero logo: logo.png is a square with the
+   mark in a thin middle band, so crop the box to it and render it white. */
+.footer-logo {
+  position: absolute;
+  left: 48.2%;
+  top: 9%;
+  transform: translate(-50%, -50%);
+  width: 24%;
+  aspect-ratio: 10 / 3;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+
+/* Clickable areas over the social icons drawn in footer.png (positions are
+   the icon centres as % of the image). */
+.footer-social {
+  position: absolute;
+  top: 25.65%;
+  width: max(3.3%, 20px);
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
+.footer-social:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.footer-social:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+
+.footer-instagram {
+  left: 79.86%;
+}
+
 /* Copyright sits on the white wave where footer.png used to have it baked in;
    position and size are relative to the full-width image so it stays aligned. */
 .footer-copyright {

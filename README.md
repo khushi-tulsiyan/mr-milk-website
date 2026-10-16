@@ -5,7 +5,7 @@ A modern, responsive website for M.R. MILK dairy products, built from Figma desi
 ## Features
 
 - **Hero Section**: Beautiful sky background with animated clouds, milk splash, and product showcase
-- **Product Grid**: Interactive product cards for ghee and dairy products with hover effects
+- **Product Grid**: Interactive product cards for milk, chaach, dahi and paneer (ghee is sold separately in the Buy Ghee Online section)
 - **Customer Testimonials**: Star-rated customer feedback section
 - **Footer**: Brand information, delivery areas, social media links, and decorative cow silhouettes
 
@@ -25,7 +25,7 @@ A modern, responsive website for M.R. MILK dairy products, built from Figma desi
 ## Components
 
 1. **HeroSection**: Sky background with clouds, milk splash, grassy field, and product showcase
-2. **ProductGrid**: Two rows of product cards (ghee products and dairy products)
+2. **ProductGrid**: Product cards for milk, chaach, dahi and paneer, ordered via WhatsApp
 3. **Testimonials**: Customer feedback cards with star ratings
 4. **Footer**: Brand information, government logos, social media, and cow silhouettes
 

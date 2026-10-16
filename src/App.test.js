@@ -89,9 +89,15 @@ test('reviews are in a slider with controls, and About Us shows the customer cou
   expect(screen.queryByText(/100\+ customers/)).not.toBeInTheDocument();
 });
 
-test('footer links to JFAM Instagram in a new tab', () => {
+test('footer links to JFAM Instagram and Facebook in a new tab', () => {
   render(<App />);
-  const link = screen.getByRole('link', { name: 'Follow JFAM on Instagram' });
-  expect(link).toHaveAttribute('href', 'https://www.instagram.com/jfam.milk/');
-  expect(link).toHaveAttribute('target', '_blank');
+  const links = {
+    'Follow JFAM on Instagram': 'https://www.instagram.com/jfam.milk/',
+    'Follow JFAM on Facebook': 'https://www.facebook.com/share/194yDPixnP/',
+  };
+  Object.entries(links).forEach(([name, href]) => {
+    const link = screen.getByRole('link', { name });
+    expect(link).toHaveAttribute('href', href);
+    expect(link).toHaveAttribute('target', '_blank');
+  });
 });

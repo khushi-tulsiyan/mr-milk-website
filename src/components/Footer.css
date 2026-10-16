@@ -7,6 +7,7 @@
 }
 
 .footer-container {
+  position: relative;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -19,6 +20,20 @@
   display: block;
   object-fit: cover;
   max-width: 100%;
+}
+
+/* Copyright sits on the white wave where footer.png used to have it baked in;
+   position and size are relative to the full-width image so it stays aligned. */
+.footer-copyright {
+  position: absolute;
+  left: 2.2%;
+  top: 50.4%;
+  transform: translateY(-50%);
+  margin: 0;
+  font-size: clamp(9px, 1.45vw, 22px);
+  font-weight: 500;
+  color: #111;
+  white-space: nowrap;
 }
 
 /* Responsive Design */

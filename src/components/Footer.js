@@ -14,6 +14,9 @@ const Footer = () => {
           alt="JFAM Footer"
           className="footer-image"
         />
+        <p className="footer-copyright">
+          © {new Date().getFullYear()} JFAM. All rights reserved.
+        </p>
       </div>
     </footer>
   );
